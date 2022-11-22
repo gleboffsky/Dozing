@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMutex>
+#include <fstream>
 
 class Worker : public QObject
 {
@@ -23,7 +24,10 @@ public:
      */
     void abort();
 
+
+
 private:
+
     /**
      * @brief Process is aborted when @em true
      */
@@ -37,6 +41,7 @@ private:
      * @brief Protects access to #_abort
      */
     QMutex mutex;
+
 
 signals:
     /**

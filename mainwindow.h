@@ -29,6 +29,7 @@ private slots:
     void on_pushButton_port_connection_clicked();
     void on_pushButton_generate_simple_doz_clicked();
     void on_pushButton_generate_imp_doz_clicked();
+    void clear_files();
 };
 
 #endif // MAINWINDOW_H
