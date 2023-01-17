@@ -16,14 +16,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ListCalc.cpp \
+    deletetemplate.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    savetemplate.cpp \
+    settings.cpp
 
 HEADERS += \
-    mainwindow.h
+    ListCalc.h \
+    deletetemplate.h \
+    mainwindow.h \
+    savetemplate.h \
+    settings.h
 
 FORMS += \
-    mainwindow.ui
+    deletetemplate.ui \
+    mainwindow.ui \
+    savetemplate.ui \
+    settings.ui
 
 TRANSLATIONS += \
     Dozing_ru_RU.ts

@@ -81,6 +81,50 @@
     <property name="spacing">
      <number>0</number>
     </property>
+    <item row="3" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Готовность</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>24</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QTextEdit" name="textEdit_console">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0" colspan="2">
      <widget class="QGroupBox" name="groupBox">
       <property name="styleSheet">
@@ -104,8 +148,25 @@
            <pointsize>15</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+                                          background-color: rgb(243, 243, 243);
+                                            color: rgb(25, 25, 25);
+                                            text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+         </property>
          <property name="text">
-          <string>Запустить</string>
+          <string>Подсоединить</string>
          </property>
         </widget>
        </item>
@@ -126,897 +187,11 @@
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="label_connection_status">
       <property name="text">
        <string> Отключен</string>
       </property>
      </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(243, 243, 243);
-                                       QTabBar::tab:hover {
-                                      color: rgb(255, 255, 255);
-                                       background-color: rgb(214, 214, 214);
-                                       }
-                                       QTabBar::tab:selected{
-                                       color: rgb(29, 89, 255);
-                                       background-color: rgb(255, 255, 255);
-                                       }
-</string>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <attribute name="title">
-        <string>Простое дозирование</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="22,0,1">
-        <item>
-         <widget class="QGroupBox" name="groupBox_12">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QGroupBox {background-color: rgb(243, 243, 243);border: none;border-radius: 15px;}QGroupBox::title {subcontrol-origin: margin;subcontrol-position: top center;padding: 0 3px;}
-</string>
-          </property>
-          <property name="title">
-           <string>Параметры работы</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_groupBox_8" columnstretch="1,3">
-           <property name="leftMargin">
-            <number>22</number>
-           </property>
-           <property name="topMargin">
-            <number>22</number>
-           </property>
-           <property name="horizontalSpacing">
-            <number>6</number>
-           </property>
-           <item row="4" column="0">
-            <widget class="QLineEdit" name="lineEdit_working_volume">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.5</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="label_55">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Скорость втягивания</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLineEdit" name="lineEdit_retraction_speed">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>20</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="label_36">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none
-</string>
-             </property>
-             <property name="text">
-              <string>Объем капли(мкл)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLabel" name="label_9">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Рабочий объем(мл)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_56">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Скорость выдавливания</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLineEdit" name="lineEdit_dosing_coeff">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>14.064</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLineEdit" name="lineEdit_drop_volume">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>700</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="label_174">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Коэффициент выдавливания</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QLabel" name="label_10">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Коэффициент дозирования(мм/мл)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLineEdit" name="lineEdit_desktop_temperature">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLineEdit" name="lineEdit_extrusion_speed">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>20</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLineEdit" name="lineEdit_coeff_retract">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLineEdit" name="lineEdit_extruder_temperature">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QLabel" name="label_11">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Температура рабочего стола</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="1">
-            <widget class="QLabel" name="label_12_">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Температура экструдера</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_generate_simple_doz">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-                                          background-color: #FFFFFF;
-                                           border: 1px solid rgb(79, 79, 79);
-                                              border-radius: 10px;
-                                              color: rgb(25, 25, 25);
-                                              text-align:center;
-                                          }
-                                          QPushButton:hover {
-                                           border-color: rgb(82, 168, 236);
-                                          border-radius: 0px;
-                                          color: rgb(82, 168, 236);
-                                          }
-                                          QPushButton:pressed {
-                                          border-color: rgb(5, 97, 245);
-                                          border-radius: 10px;
-                                          color: rgb(5, 97, 245);
-                                          }</string>
-          </property>
-          <property name="text">
-           <string>Генерация</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_tab_11_1">
-          <property name="spacing">
-           <number>25</number>
-          </property>
-          <property name="leftMargin">
-           <number>23</number>
-          </property>
-          <property name="rightMargin">
-           <number>24</number>
-          </property>
-          <item>
-           <widget class="QComboBox" name="list_tools_simple_templates">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_save_simple_doz">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-                                          background-color: #FFFFFF;
-                                           border: 1px solid rgb(79, 79, 79);
-                                              color: rgb(25, 25, 25);
-                                              text-align:center;
-                                          }
-                                          QPushButton:hover {
-                                           border-color: rgb(82, 168, 236);
-                                          border-radius: 0px;
-                                          color: rgb(82, 168, 236);
-                                          }
-                                          QPushButton:pressed {
-                                          border-color: rgb(5, 97, 245);
-                                          border-radius: 10px;
-                                          color: rgb(5, 97, 245);
-                                          }</string>
-            </property>
-            <property name="text">
-             <string>Сохранить инструмент</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_delete_simple_doz">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-                                          background-color: #FFFFFF;
-                                           border: 1px solid rgb(79, 79, 79);
-                                              color: rgb(25, 25, 25);
-                                              text-align:center;
-                                          }
-                                          QPushButton:hover {
-                                           border-color: rgb(82, 168, 236);
-                                          border-radius: 0px;
-                                          color: rgb(82, 168, 236);
-                                          }
-                                          QPushButton:pressed {
-                                          border-color: rgb(5, 97, 245);
-                                          border-radius: 10px;
-                                          color: rgb(5, 97, 245);
-                                          }</string>
-            </property>
-            <property name="text">
-             <string>Удалить инструмент</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Импульсное дозирование</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="22,0,1">
-        <item>
-         <widget class="QGroupBox" name="groupBox_13">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QGroupBox {background-color: rgb(243, 243, 243);border: none;border-radius: 15px;}QGroupBox::title {subcontrol-origin: margin;subcontrol-position: top center;padding: 0 3px;}
-</string>
-          </property>
-          <property name="title">
-           <string>Параметры работы</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_groupBox_9" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="1,3">
-           <property name="leftMargin">
-            <number>22</number>
-           </property>
-           <property name="topMargin">
-            <number>22</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <property name="horizontalSpacing">
-            <number>6</number>
-           </property>
-           <item row="0" column="1">
-            <widget class="QLabel" name="label_37">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none
-</string>
-             </property>
-             <property name="text">
-              <string>Объем капли(мкл)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLineEdit" name="lineEdit_retraction_speed_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>20</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_58">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Скорость выдавливания</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="label_175">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Коэффициент выдавливания</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QLabel" name="label_14">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Коэффициент дозирования(мм/мл)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLineEdit" name="lineEdit_coeff_retract_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLabel" name="label_13">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Рабочий объем(мл)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLineEdit" name="lineEdit_extruder_temperature_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLineEdit" name="lineEdit_extrusion_speed_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>20</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLineEdit" name="lineEdit_dosing_coeff_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>14.064</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QLabel" name="label_15">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Температура рабочего стола</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLineEdit" name="lineEdit_desktop_temperature_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLineEdit" name="lineEdit_working_volume_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.5</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="1">
-            <widget class="QLabel" name="label_16">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Температура  экструдера</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="label_57">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border:none</string>
-             </property>
-             <property name="text">
-              <string>Скорость втягивания</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="0">
-            <widget class="QComboBox" name="comboBox_imp_pause">
-             <property name="font">
-              <font>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>Цикловая пауза</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Межцикловая пауза</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLineEdit" name="lineEdit_drop_volume_imp">
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>700</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0">
-            <widget class="QLineEdit" name="lineEdit_pause_imp">
-             <property name="styleSheet">
-              <string notr="true">background: rgb(255, 255, 255)</string>
-             </property>
-             <property name="text">
-              <string>0.1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="1">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Длительность паузы</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_generate_imp_doz">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-                                          background-color: #FFFFFF;
-                                           border: 1px solid rgb(79, 79, 79);
-                                              border-radius: 10px;
-                                              color: rgb(25, 25, 25);
-                                              text-align:center;
-                                          }
-                                          QPushButton:hover {
-                                           border-color: rgb(82, 168, 236);
-                                          border-radius: 0px;
-                                          color: rgb(82, 168, 236);
-                                          }
-                                          QPushButton:pressed {
-                                          border-color: rgb(5, 97, 245);
-                                          border-radius: 10px;
-                                          color: rgb(5, 97, 245);
-                                          }</string>
-          </property>
-          <property name="text">
-           <string>Генерация</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_tab_11_">
-          <property name="spacing">
-           <number>25</number>
-          </property>
-          <property name="leftMargin">
-           <number>23</number>
-          </property>
-          <property name="rightMargin">
-           <number>24</number>
-          </property>
-          <item>
-           <widget class="QComboBox" name="list_tools_imp_templates">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_save_imp_doz">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-                                          background-color: #FFFFFF;
-                                           border: 1px solid rgb(79, 79, 79);
-                                              color: rgb(25, 25, 25);
-                                              text-align:center;
-                                          }
-                                          QPushButton:hover {
-                                           border-color: rgb(82, 168, 236);
-                                          border-radius: 0px;
-                                          color: rgb(82, 168, 236);
-                                          }
-                                          QPushButton:pressed {
-                                          border-color: rgb(5, 97, 245);
-                                          border-radius: 10px;
-                                          color: rgb(5, 97, 245);
-                                          }</string>
-            </property>
-            <property name="text">
-             <string>Сохранить инструмент</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_delete_imp_doz">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-                                          background-color: #FFFFFF;
-                                           border: 1px solid rgb(79, 79, 79);
-                                              color: rgb(25, 25, 25);
-                                              text-align:center;
-                                          }
-                                          QPushButton:hover {
-                                           border-color: rgb(82, 168, 236);
-                                          border-radius: 0px;
-                                          color: rgb(82, 168, 236);
-                                          }
-                                          QPushButton:pressed {
-                                          border-color: rgb(5, 97, 245);
-                                          border-radius: 10px;
-                                          color: rgb(5, 97, 245);
-                                          }</string>
-            </property>
-            <property name="text">
-             <string>Удалить инструмент</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Готовность</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QProgressBar" name="progressBar">
-        <property name="value">
-         <number>24</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
     <item row="1" column="1">
      <widget class="QGroupBox" name="groupBox_2">
@@ -1156,7 +331,7 @@
         </widget>
        </item>
        <item row="6" column="1" colspan="4">
-        <widget class="QLineEdit" name="lineEdit_95">
+        <widget class="QLineEdit" name="lineEdit_send_gcode">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -1215,11 +390,29 @@
         </widget>
        </item>
        <item row="6" column="5">
-        <widget class="QPushButton" name="pushButton_94">
+        <widget class="QPushButton" name="pushButton_send_gcode">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
          </property>
          <property name="text">
           <string>Отправить</string>
@@ -1389,6 +582,12 @@
        </item>
        <item row="6" column="0">
         <widget class="QLabel" name="label_127">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
            <family>Yu Gothic Medium</family>
@@ -1445,6 +644,12 @@
              <bold>false</bold>
             </font>
            </property>
+           <property name="maximum">
+            <number>10000</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
           </widget>
          </item>
         </layout>
@@ -1485,6 +690,12 @@
              <pointsize>12</pointsize>
             </font>
            </property>
+           <property name="maximum">
+            <number>10000</number>
+           </property>
+           <property name="value">
+            <number>50</number>
+           </property>
           </widget>
          </item>
         </layout>
@@ -1492,23 +703,967 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QTextBrowser" name="textBrowser_console">
+    <item row="1" column="0">
+     <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
-      <property name="html">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(243, 243, 243);
+                                       QTabBar::tab:hover {
+                                      color: rgb(255, 255, 255);
+                                       background-color: rgb(214, 214, 214);
+                                       }
+                                       QTabBar::tab:selected{
+                                       color: rgb(29, 89, 255);
+                                       background-color: rgb(255, 255, 255);
+                                       }
+</string>
       </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <attribute name="title">
+        <string>Простое дозирование</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="22,0,1">
+        <item>
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {background-color: rgb(243, 243, 243);border: none;border-radius: 15px;}QGroupBox::title {subcontrol-origin: margin;subcontrol-position: top center;padding: 0 3px;}
+</string>
+          </property>
+          <property name="title">
+           <string>Параметры работы</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_groupBox_8" columnstretch="1,3">
+           <property name="leftMargin">
+            <number>22</number>
+           </property>
+           <property name="topMargin">
+            <number>22</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>6</number>
+           </property>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_56">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Скорость выдавливания(мм/мин)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_36">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none
+</string>
+             </property>
+             <property name="text">
+              <string>Объем капли(мкл)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLineEdit" name="lineEdit_working_volume">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.5</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLineEdit" name="lineEdit_drop_volume">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>700</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLineEdit" name="lineEdit_desktop_temperature">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLabel" name="label_10">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Коэффициент дозирования(мм/мл)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLineEdit" name="lineEdit_dosing_coeff">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>14.064</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="label_174">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Коэффициент выдавливания</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLineEdit" name="lineEdit_retraction_speed">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLineEdit" name="lineEdit_extrusion_speed">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_55">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Скорость втягивания(мм/мин)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="label_9">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Рабочий объем(мл)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLabel" name="label_12_">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Температура экструдера(°C)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="label_11">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Температура рабочего стола(°C)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLineEdit" name="lineEdit_extruder_temperature">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLineEdit" name="lineEdit_coeff_retract">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QComboBox" name="comboBox_working_axis_simp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>X</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Y</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Z</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>E</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QLabel" name="label_working_axis_simp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Рабочая ось</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_generate_simple_doz">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              border-radius: 10px;
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+          </property>
+          <property name="text">
+           <string>Генерация</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_tab_11_1">
+          <property name="spacing">
+           <number>25</number>
+          </property>
+          <property name="leftMargin">
+           <number>23</number>
+          </property>
+          <property name="rightMargin">
+           <number>24</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="list_tools_simple_templates">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_save_simple_doz">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+            </property>
+            <property name="text">
+             <string>Сохранить шаблон</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_delete_simple_doz">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+            </property>
+            <property name="text">
+             <string>Удалить шаблон</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Импульсное дозирование</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="22,0,1">
+        <item>
+         <widget class="QGroupBox" name="groupBox_13">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {background-color: rgb(243, 243, 243);border: none;border-radius: 15px;}QGroupBox::title {subcontrol-origin: margin;subcontrol-position: top center;padding: 0 3px;}
+</string>
+          </property>
+          <property name="title">
+           <string>Параметры работы</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_groupBox_9" rowstretch="0,0,0,0,0,0,0,0,0,0,0" columnstretch="1,3">
+           <property name="leftMargin">
+            <number>22</number>
+           </property>
+           <property name="topMargin">
+            <number>29</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>6</number>
+           </property>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_37">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none
+</string>
+             </property>
+             <property name="text">
+              <string>Объем капли(мкл)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="label_13">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Рабочий объем(мл)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLineEdit" name="lineEdit_retraction_speed_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLineEdit" name="lineEdit_extruder_temperature_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QLabel" name="label_16">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Температура  экструдера(°C)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="label_15">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Температура рабочего стола(°C)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QComboBox" name="comboBox_imp_pause">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>Цикловая пауза</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Межцикловая пауза</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLabel" name="label_14">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Коэффициент дозирования(мм/мл)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLineEdit" name="lineEdit_desktop_temperature_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLineEdit" name="lineEdit_pause_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLineEdit" name="lineEdit_extrusion_speed_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_58">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Скорость выдавливания(мм/мин)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLineEdit" name="lineEdit_drop_volume_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>700</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_57">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Скорость втягивания(мм/мин)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="label_175">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:none</string>
+             </property>
+             <property name="text">
+              <string>Коэффициент выдавливания</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLineEdit" name="lineEdit_coeff_retract_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Длительность паузы(сек)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLineEdit" name="lineEdit_working_volume_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>0.5</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLineEdit" name="lineEdit_dosing_coeff_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <property name="text">
+              <string>14.064</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <widget class="QComboBox" name="comboBox_working_axis_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: rgb(255, 255, 255)</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>X</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Y</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Z</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>E</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QLabel" name="label_working_axis_imp">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Рабочая ось</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_generate_imp_doz">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              border-radius: 10px;
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+          </property>
+          <property name="text">
+           <string>Генерация</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_tab_11_">
+          <property name="spacing">
+           <number>25</number>
+          </property>
+          <property name="leftMargin">
+           <number>23</number>
+          </property>
+          <property name="rightMargin">
+           <number>24</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="list_tools_imp_templates">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_save_imp_doz">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+            </property>
+            <property name="text">
+             <string>Сохранить шаблон</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_delete_imp_doz">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                                          background-color: #FFFFFF;
+                                           border: 1px solid rgb(79, 79, 79);
+                                              color: rgb(25, 25, 25);
+                                              text-align:center;
+                                          }
+                                          QPushButton:hover {
+                                           border-color: rgb(82, 168, 236);
+                                          border-radius: 0px;
+                                          color: rgb(82, 168, 236);
+                                          }
+                                          QPushButton:pressed {
+                                          border-color: rgb(5, 97, 245);
+                                          border-radius: 10px;
+                                          color: rgb(5, 97, 245);
+                                          }</string>
+            </property>
+            <property name="text">
+             <string>Удалить шаблон</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1519,7 +1674,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <x>0</x>
      <y>0</y>
      <width>1297</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1529,12 +1684,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>Сервис</string>
+     <string>Конфигурация</string>
     </property>
+    <addaction name="action"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
   </widget>
+  <action name="action">
+   <property name="text">
+    <string>Настройки</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

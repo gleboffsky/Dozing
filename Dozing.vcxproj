@@ -66,7 +66,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>6.4.0_msvc2019_64</QtInstall>
+    <QtInstall>6.4.1_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtQMLDebugEnable>
     </QtQMLDebugEnable>
@@ -196,6 +196,7 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="deletetemplate.cpp" />
     <ClCompile Include="ListCalc.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp">
@@ -204,6 +205,8 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="savetemplate.cpp" />
+    <ClCompile Include="settings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
@@ -231,11 +234,23 @@
     <None Include="Dozing_ru_RU.ts" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="deletetemplate.ui" />
     <QtUic Include="mainwindow.ui">
     </QtUic>
+    <QtUic Include="savetemplate.ui" />
+    <QtUic Include="settings.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ListCalc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="deletetemplate.h" />
+    <QtMoc Include="savetemplate.h" />
+    <ClInclude Include="ui_deletetemplate.h" />
+    <ClInclude Include="ui_savetemplate.h" />
+    <ClInclude Include="ui_settings.h" />
+    <QtMoc Include="settings.h" />
+    <ClInclude Include="ui_mainwindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

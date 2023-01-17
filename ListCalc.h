@@ -23,6 +23,7 @@ public:
      * It is thread safe as it uses #mutex to protect access to #_abort variable.
      */
     void abort();
+    bool connection_status;
 
 
 
@@ -36,7 +37,7 @@ private:
      * @brief @em true when Worker is doing work
      */
     bool _working;
-    bool connection_status;
+
     /**
      * @brief Protects access to #_abort
      */
@@ -58,6 +59,8 @@ signals:
      */
     void finished();
 
+
+
 public slots:
     /**
      * @brief Does something
@@ -66,6 +69,7 @@ public slots:
      * Counting is interrupted if #_aborted is set to true.
      */
     void doWork();
+
 };
 
 #endif // ListCalc_H
