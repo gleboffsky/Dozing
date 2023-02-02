@@ -2,42 +2,29 @@
 using namespace std;
 
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     clear_files();
+    creating_json();
     thread = new QThread();
     worker = new Worker();
     worker->moveToThread(thread);
     timer = new QTimer();
-    del_temp = new DeleteTemplate(this);
-    save_temp = new SaveTemplate(this);
+    del_temp = new DeleteTemplate();
+    save_temp = new SaveTemplate();
     connect(timer, SIGNAL(timeout()), this, SLOT(check_status()));
     timer->start(1000); // И запустим таймер
+    update_template_names("simple");
+    update_template_names("imp");
     connect(worker, SIGNAL(valueChanged(QString)), ui->textEdit_console, SLOT(setText(QString)));
     connect(worker, SIGNAL(valueChanged(QString)), this, SLOT(scroll_console_bottom()));
     connect(worker, SIGNAL(workRequested()), thread, SLOT(start()));
     connect(thread, SIGNAL(started()), worker, SLOT(doWork()));
     connect(worker, SIGNAL(finished()), thread, SLOT(quit()), Qt::DirectConnection);
-
-
-}
-
-void MainWindow::scroll_console_bottom()
-{
-    ui->textEdit_console->moveCursor(QTextCursor::End);
-}
-
-void MainWindow::check_status() 
-{
-    if (thread->isRunning()) {
-        ui->pushButton_port_connection->setText("\xd0\x9e\xd1\x82\xd1\x81\xd0\xbe\xd0\xb5\xd0\xb4\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x82\xd1\x8c");
-        ui->label_connection_status->setText("\xd0\x9f\xd0\xbe\xd0\xb4\xd0\xba\xd0\xbb\xd1\x8e\xd1\x87\xd0\xb5\xd0\xbd\xd0\xbe");
-    }
-    else {
-        ui->pushButton_port_connection->setText("\xd0\x9f\xd0\xbe\xd0\xb4\xd1\x81\xd0\xbe\xd0\xb5\xd0\xb4\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x82\xd1\x8c");
-        ui->label_connection_status->setText("\xd0\x9e\xd1\x82\xd0\xba\xd0\xbb\xd1\x8e\xd1\x87\xd0\xb5\xd0\xbd\xd0\xbe");
-    }
+    connect(save_temp, SIGNAL(save_simple_confirm(std::string)), this, SLOT(save_simple_template(std::string)));
+    connect(save_temp, SIGNAL(save_imp_confirm(std::string)), this, SLOT(save_imp_template(std::string)));
+    connect(del_temp, SIGNAL(template_deleted(std::string)), this, SLOT(update_template_names(std::string)));
 
 }
 
@@ -51,6 +38,126 @@ MainWindow::~MainWindow()
     delete del_temp;
     delete save_temp;
 }
+
+void MainWindow::save_simple_template(string name)
+{
+    qDebug() << "DQWEQWEWQE";
+    if (name != "") {
+        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        nlohmann::json data = nlohmann::json::parse(fread);
+        data.push_back({ name, {
+        {"drop_volume", ui->lineEdit_drop_volume->text().toStdString()},
+        {"retraction_speed", ui->lineEdit_retraction_speed->text().toStdString()},
+        {"extrusion_speed", ui->lineEdit_extrusion_speed->text().toStdString()},
+        {"coeff_retract", ui->lineEdit_coeff_retract->text().toStdString()},
+        {"working_volume", ui->lineEdit_working_volume->text().toStdString()},
+        {"dosing_coeff", ui->lineEdit_dosing_coeff->text().toStdString()},
+        {"desktop_temperature", ui->lineEdit_desktop_temperature->text().toStdString()},
+        {"extruder_temperature", ui->lineEdit_extruder_temperature->text().toStdString()},
+        {"working_axis_simp", ui->comboBox_working_axis_simp->currentText().toStdString()}
+      } });
+        fread.close();
+        ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        fwrite << data;
+        fwrite.close();
+
+        update_template_names("simple");
+    }   
+}
+
+void MainWindow::update_template_names(std::string kind)
+{
+    if (kind == "simple") {
+        QStringList list;
+        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        nlohmann::json data = nlohmann::json::parse(fread);
+
+        for (auto it = std::begin(data); it != std::end(data); ++it) {
+            list.append(QString::fromStdString(it.key()));
+        }
+        ui->list_tools_simple_templates->clear();
+        ui->list_tools_simple_templates->addItems(list);
+        fread.close();
+    }
+
+    if (kind == "imp") {
+        QStringList list;
+        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        nlohmann::json data = nlohmann::json::parse(fread);
+
+        for (auto it = std::begin(data); it != std::end(data); ++it) {
+            list.append(QString::fromStdString(it.key()));
+        }
+        ui->list_tools_imp_templates->clear();
+        ui->list_tools_imp_templates->addItems(list);
+        fread.close();
+    }
+}
+
+void MainWindow::save_imp_template(std::string name)
+{
+    if (name != "") {
+        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        nlohmann::json data = nlohmann::json::parse(fread);
+        data.push_back({ name, {
+        {"drop_volume", ui->lineEdit_drop_volume_imp->text().toStdString()},
+        {"retraction_speed", ui->lineEdit_retraction_speed_imp->text().toStdString()},
+        {"extrusion_speed", ui->lineEdit_extrusion_speed_imp->text().toStdString()},
+        {"coeff_retract", ui->lineEdit_coeff_retract_imp->text().toStdString()},
+        {"working_volume", ui->lineEdit_working_volume_imp->text().toStdString()},
+        {"dosing_coeff", ui->lineEdit_dosing_coeff_imp->text().toStdString()},
+        {"desktop_temperature", ui->lineEdit_desktop_temperature_imp->text().toStdString()},
+        {"extruder_temperature", ui->lineEdit_extruder_temperature_imp->text().toStdString()},
+        {"pause", ui->lineEdit_pause_imp->text().toStdString()},
+        {"working_axis_imp", ui->comboBox_working_axis_imp->currentText().toStdString()},
+        {"kind_of_pause", ui->comboBox_imp_pause->currentText().toStdString()}
+      } });
+        fread.close();
+        ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        fwrite << data;
+        fwrite.close();
+
+        update_template_names("imp");
+
+    }
+}
+
+void MainWindow::scroll_console_bottom()
+{
+    ui->textEdit_console->moveCursor(QTextCursor::End);
+}
+
+void MainWindow::creating_json()
+{
+    #include <map>
+    if (!std::filesystem::exists("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json")) {
+        std::ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        string sample = "{}";
+        fwrite << sample;
+        fwrite.close();
+    }
+
+    if (!std::filesystem::exists("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json")) {
+        std::ofstream fwrite_imp("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        string sample_imp = "{}";
+        fwrite_imp << sample_imp;
+        fwrite_imp.close();
+    }
+}
+
+void MainWindow::check_status() 
+{
+    if (thread->isRunning()) {
+        ui->pushButton_port_connection->setText("\xd0\x9e\xd1\x82\xd1\x81\xd0\xbe\xd0\xb5\xd0\xb4\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x82\xd1\x8c");
+        ui->label_connection_status->setText("\xd0\x9f\xd0\xbe\xd0\xb4\xd0\xba\xd0\xbb\xd1\x8e\xd1\x87\xd0\xb5\xd0\xbd\xd0\xbe");
+    }
+    else {
+        ui->pushButton_port_connection->setText("\xd0\x9f\xd0\xbe\xd0\xb4\xd1\x81\xd0\xbe\xd0\xb5\xd0\xb4\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x82\xd1\x8c");
+        ui->label_connection_status->setText("\xd0\x9e\xd1\x82\xd0\xba\xd0\xbb\xd1\x8e\xd1\x87\xd0\xb5\xd0\xbd\xd0\xbe");
+    }
+}
+
+
 
 void MainWindow::clear_files()
 {
@@ -66,12 +173,10 @@ void MainWindow::on_pushButton_port_connection_clicked()
         // To avoid having two threads running simultaneously, the previous thread is aborted.
     if (thread->isRunning()) {
         worker->abort();
-        qDebug() << "OFF";
     }
     //thread->wait(); // If the thread is not running, this will immediately return.
     else {
         worker->requestWork();
-        qDebug() << "ON";
     }
 }
 
@@ -97,21 +202,19 @@ void MainWindow::on_pushButton_generate_simple_doz_clicked()
     string bed_temp = ui->lineEdit_desktop_temperature->text().toStdString();
     // ��� �������� ����� : ��� ������� ������� ����� -- ���, ������� ������ ����� ����������������� �������� �� ������ ���.
     // ����� ��� ���� ������ �� ��������� ��������� � ����� ��������� ������ ������ ��� ��������
-    string gcode_head = "G92 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(start_coord);
-    //string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
-    string gcode_str = "";
+    string gcode_head = "\nG92 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
+    string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
     while (work_coord > 0) {
         work_coord = work_coord - drop_offset;
-        gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(round(work_coord * 1000) / 1000) + " F" + to_string(drop_speed); // ������� ��������
+        gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(work_coord).erase(to_string(work_coord).size() - 3) + " F" + to_string(drop_speed); // ������� ��������
         if (retract) {
-            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(round((work_coord + drop_offset * k_retr) * 1000) / 1000) + " F" + to_string(retr_speed);  // �������
-            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(round(work_coord * 1000) / 1000) + "F" + to_string(retr_speed);  // ����������� ��������
+            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(work_coord + drop_offset * k_retr).erase(to_string(work_coord + drop_offset * k_retr).size() - 3) + " F" + to_string(retr_speed);  // �������
+            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(work_coord).erase(to_string(work_coord).size() - 3) + " F" + to_string(retr_speed);  // ����������� ��������
         }
     }
-
     std::ofstream file;
-    file.open(commands_path + "\\scenario.txt");
-    file << gcode_head + gcode_str + "\n" + "      ";
+    file.open(commands_path + "\\scenario.txt", std::ios::app);
+    file << gcode_head + gcode_str;
     file.close();
 }
 
@@ -136,47 +239,45 @@ void MainWindow::on_pushButton_generate_imp_doz_clicked()
     string bed_temp = ui->lineEdit_desktop_temperature_imp->text().toStdString();
     // ��� �������� ����� : ��� ������� ������� ����� -- ���, ������� ������ ����� ����������������� �������� �� ������ ���.
     // ����� ��� ���� ������ �� ��������� ��������� � ����� ��������� ������ ������ ��� ��������
-    float pause_speed = drop_offset / drop_pause * 60;
-    string gcode_head = "G92 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(start_coord);
-    string gcode_str = "";
-    //string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
+    //float pause_speed = drop_offset / drop_pause * 60;
+    string gcode_head = "\nG92 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
+    string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
     if (mode == mode_inter_cycle) {
         pause_inter_cycle = true;
     }
     while (work_coord > 0) {    
         work_coord = work_coord - drop_offset;
-        gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(round(work_coord * 1000) / 1000) + " F" + to_string(drop_speed); // ������� ��������
+        gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(work_coord).erase(to_string(work_coord).size() - 3) + " F" + to_string(drop_speed); // ������� ��������
         if (pause_inter_cycle) {
             gcode_str = gcode_str + '\n' + "G4 S" + ui->lineEdit_pause_imp->text().toStdString();
             //gcode_str = gcode_str + '\n' + "G1 X" + to_string(round(work_coord * 1000) / 1000) + " F" + to_string(pause_speed);  // �����
         };
         if (retract) {
-            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(round((work_coord + drop_offset * k_retr) * 1000) / 1000) + " F" + to_string(retr_speed);  // �������
+            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(work_coord + drop_offset * k_retr).erase(to_string(work_coord + drop_offset * k_retr).size() - 3) + " F" + to_string(retr_speed);  // �������
 
             gcode_str = gcode_str + '\n' + "G4 S" + ui->lineEdit_pause_imp->text().toStdString();
             //gcode_str = gcode_str + '\n' + "G1 X" + to_string(round(work_coord * 1000) / 1000) + " F" + to_string(pause_speed);  // �����
 
-            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(round(work_coord * 1000) / 1000) + " F" + to_string(retr_speed);  // ����������� ��������
+            gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(work_coord).erase(to_string(work_coord).size() - 3) + " F" + to_string(retr_speed);  // ����������� ��������
         }
     }
 
     std::ofstream file;
-    file.open(commands_path + "\\scenario.txt");
-    file << gcode_head + gcode_str + "\n" + "      ";
+    file.open(commands_path + "\\scenario.txt", std::ios::app);
+    file << gcode_head + gcode_str;
     file.close();
 }
 
 
 void MainWindow::on_pushButton_delete_imp_doz_clicked()
 {
-    del_temp->change_template_name("imp");
+    del_temp->change_template_name("imp", ui->list_tools_imp_templates->currentText().toStdString());
     del_temp->show();
-
 }
 
 void MainWindow::on_pushButton_delete_simple_doz_clicked()
 {
-    del_temp->change_template_name("simp");
+    del_temp->change_template_name("simp", ui->list_tools_simple_templates->currentText().toStdString());
     del_temp->show();
 }
 
@@ -198,20 +299,107 @@ void MainWindow::on_pushButton_send_gcode_clicked()
         string s1 = ui->lineEdit_send_gcode->text().toStdString();
         transform(s1.begin(), s1.end(), s1.begin(), ::toupper);
         std::ofstream f(commands_path + "\\scenario.txt", std::ios::app);
-        f << "\n" + s1 + "\n" + "      ";
+        f << "\n" + s1;
         f.close();
 
     }
 }
 
-void MainWindow::on_pushButton_21_clicked()
+void MainWindow::on_comboBox_main_axes_currentTextChanged(const QString& arg1)
+{
+    if (ui->comboBox_main_axes->currentText() == "X") {
+        ui->label_main_axes->setText("X");
+        ui->pushButton_main_axes_up->setText("X🡅");
+        ui->pushButton_main_axes_down->setText("X🡇");
+    }
+    else if (ui->comboBox_main_axes->currentText() == "Y") {
+        ui->label_main_axes->setText("Y");
+        ui->pushButton_main_axes_up->setText("Y🡅");
+        ui->pushButton_main_axes_down->setText("Y🡇");
+    }
+    else if (ui->comboBox_main_axes->currentText() == "Z") {
+        ui->label_main_axes->setText("Z");
+        ui->pushButton_main_axes_up->setText("Z🡅");
+        ui->pushButton_main_axes_down->setText("Z🡇");
+    }
+    else if (ui->comboBox_main_axes->currentText() == "E") {
+        ui->label_main_axes->setText("E");
+        ui->pushButton_main_axes_up->setText("E🡅");
+        ui->pushButton_main_axes_down->setText("E🡇");
+    }
+}
+
+void MainWindow::on_list_tools_simple_templates_textActivated(const QString& arg1)
+{
+    ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+    nlohmann::json data = nlohmann::json::parse(fread);
+
+    ui->lineEdit_drop_volume->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["drop_volume"]));
+    ui->lineEdit_retraction_speed->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["retraction_speed"]));
+    ui->lineEdit_extrusion_speed->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["extrusion_speed"]));
+    ui->lineEdit_coeff_retract->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["coeff_retract"]));
+    ui->lineEdit_working_volume->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["working_volume"]));
+    ui->lineEdit_dosing_coeff->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["dosing_coeff"]));
+    ui->lineEdit_desktop_temperature->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["desktop_temperature"]));
+    ui->lineEdit_extruder_temperature->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["extruder_temperature"]));
+    ui->comboBox_working_axis_simp->setCurrentText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["drop_volume"]));
+    
+    fread.close();
+}
+
+void MainWindow::on_list_tools_imp_templates_textActivated(const QString& arg1)
 {
 
+    ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+    nlohmann::json data = nlohmann::json::parse(fread);
+
+    ui->lineEdit_drop_volume_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["drop_volume"]));
+    ui->lineEdit_retraction_speed_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["retraction_speed"]));
+    ui->lineEdit_extrusion_speed_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["extrusion_speed"]));
+    ui->lineEdit_coeff_retract_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["coeff_retract"]));
+    ui->lineEdit_working_volume_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["working_volume"]));
+    ui->lineEdit_dosing_coeff_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["dosing_coeff"]));
+    ui->lineEdit_desktop_temperature_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["desktop_temperature"]));
+    ui->lineEdit_extruder_temperature_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["extruder_temperature"]));
+    ui->lineEdit_pause_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["pause"]));
+    ui->comboBox_working_axis_imp->setCurrentText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["working_axis_imp"]));
+    ui->comboBox_imp_pause->setCurrentText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["kind_of_pause"]));
+
+    fread.close();
+}
+
+void MainWindow::on_pushButton_extruder_temp_up_clicked()
+{
+    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    fwrite << "\nM104 S" << current_extruder_temp + ui->spinBox_shift->text().toInt();
+    current_extruder_temp += ui->spinBox_shift->text().toInt();
+    fwrite.close();
 }
 
 
-void MainWindow::on_pushButton_20_clicked()
+void MainWindow::on_pushButton_extruder_temp_down_clicked()
 {
+    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    fwrite << "\nM104 S" << current_extruder_temp - ui->spinBox_shift->text().toInt();
+    current_extruder_temp -= ui->spinBox_shift->text().toInt();
+    fwrite.close();
+}
 
+
+void MainWindow::on_pushButton_bed_temp_up_clicked()
+{
+    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    fwrite << "\nM140 S" << current_bed_temp + ui->spinBox_shift->text().toInt();
+    current_bed_temp += ui->spinBox_shift->text().toInt();
+    fwrite.close();
+}
+
+
+void MainWindow::on_pushButton_bed_temp_down_clicked()
+{
+    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    fwrite << "\nM140 S" << current_bed_temp - ui->spinBox_shift->text().toInt();
+    current_bed_temp -= ui->spinBox_shift->text().toInt();
+    fwrite.close();
 }
 

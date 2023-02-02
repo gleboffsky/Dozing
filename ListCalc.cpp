@@ -62,7 +62,7 @@ void Worker::doWork()
         std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\scenario.txt";
         std::string settings_path = "C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing\\settings.txt";
         file.open(commands_path);
-        file << "------\n";
+        file << "";
         file.close();
         qDebug() << "Starting worker process in Thread " << thread()->currentThreadId();
         int number_serial_command = 1;
@@ -131,14 +131,15 @@ void Worker::doWork()
             }
 
             if (shipping_available) {
-                if (list_of_commands[number_file_command] != "      " and list_of_commands[number_file_command] != "------") {
-                    std::string serial_command = "N" + std::to_string(number_serial_command) + " " + list_of_commands[number_file_command] + "*" + gcode_csum("N" + std::to_string(number_serial_command) + " " + list_of_commands[number_file_command]) + "\n";
-                    serial.write(serial_command.c_str(), serial_command.size());
-                    qDebug() << "serial_command" << QString::fromStdString(serial_command);
+                if (list_of_commands.size() != 0 and list_of_commands.size() > number_file_command) {
+                    if (list_of_commands[number_file_command] != "") {
+                        std::string serial_command = "N" + std::to_string(number_serial_command) + " " + list_of_commands[number_file_command] + "*" + gcode_csum("N" + std::to_string(number_serial_command) + " " + list_of_commands[number_file_command]) + "\n";
+                        serial.write(serial_command.c_str(), serial_command.size());
+                        qDebug() << "serial_command" << QString::fromStdString(serial_command);
+                    }
                     number_serial_command++;
                     number_file_command++;
-                    shipping_available = false;
-                    
+                    shipping_available = false; 
                 }
             }
             buffer.clear();
@@ -156,6 +157,5 @@ void Worker::doWork()
         emit finished();
         qDebug() << ex.what();
     }
-
 
 }

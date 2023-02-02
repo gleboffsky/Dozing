@@ -2,6 +2,8 @@
 #define DELETETEMPLATE_H
 #include <iostream> 
 #include <QDialog>
+#include <nlohmann/json.hpp>
+#include <fstream>
 
 namespace Ui {
 class DeleteTemplate;
@@ -15,12 +17,19 @@ public:
     explicit DeleteTemplate(QWidget *parent = nullptr);
     ~DeleteTemplate();
 
+signals:
+    void template_deleted(std::string);
+
 private:
+    std::string name;
+    std::string kind;
     Ui::DeleteTemplate *ui;
 
 public slots:
-    void change_template_name(std::string name);
+    void change_template_name(std::string kind, std::string name);
 
+private slots:
+    void on_buttonBox_accepted();
 };
 
 #endif // DELETETEMPLATE_H

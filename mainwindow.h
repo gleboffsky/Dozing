@@ -12,6 +12,7 @@
 #include <iostream>
 #include <cmath>
 #include <filesystem>
+#include <nlohmann/json.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +30,9 @@ public:
 private:
     char* user = getenv("username");
     bool status_connection = false;
+    int current_extruder_temp;
+    int current_bed_temp;
+    float current_axis_coord;
     std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing";
     Ui::MainWindow* ui;
     Dialog settings;
@@ -50,20 +54,30 @@ private slots:
     void clear_files();
     void scroll_console_bottom();
     void check_status();
-
     void on_pushButton_save_imp_doz_clicked();
-
     void on_pushButton_save_simple_doz_clicked();
-
     void on_pushButton_delete_simple_doz_clicked();
-
     void on_pushButton_delete_imp_doz_clicked();
-
     void on_pushButton_send_gcode_clicked();
+    void on_comboBox_main_axes_currentTextChanged(const QString& arg1);
+    void creating_json();
+    //void on_pushButton_main_axes_up_clicked();
+    void save_simple_template(std::string);
+    void save_imp_template(std::string);
+    void update_template_names(std::string);
+    //void on_pushButton_main_axes_down_clicked();
 
-    void on_pushButton_21_clicked();
+    void on_list_tools_simple_templates_textActivated(const QString& arg1);
 
-    void on_pushButton_20_clicked();
+    void on_list_tools_imp_templates_textActivated(const QString& arg1);
+
+    void on_pushButton_extruder_temp_up_clicked();
+
+    void on_pushButton_extruder_temp_down_clicked();
+
+    void on_pushButton_bed_temp_up_clicked();
+
+    void on_pushButton_bed_temp_down_clicked();
 
 signals:
     void prosto_signal();

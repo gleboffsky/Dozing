@@ -51,26 +51,28 @@ public:
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_2;
     QLCDNumber *lcdNumber_2;
-    QPushButton *pushButton_22;
+    QPushButton *pushButton_extruder_temp_down;
     QLabel *label_17;
     QLCDNumber *lcdNumber_3;
-    QPushButton *pushButton_23;
+    QPushButton *pushButton_extruder_temp_up;
     QLineEdit *lineEdit_send_gcode;
-    QLabel *label_18;
-    QLCDNumber *lcdNumber;
+    QLabel *label_main_axes;
+    QLCDNumber *lcdNumber_main_axes;
     QPushButton *pushButton_send_gcode;
-    QPushButton *pushButton_20;
-    QPushButton *pushButton_21;
+    QPushButton *pushButton_main_axes_up;
+    QPushButton *pushButton_main_axes_down;
     QLabel *label_23;
-    QPushButton *pushButton_24;
-    QPushButton *pushButton_25;
+    QPushButton *pushButton_bed_temp_down;
+    QPushButton *pushButton_bed_temp_up;
     QLabel *label_127;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_4;
-    QSpinBox *spinBox;
+    QSpinBox *spinBox_shift;
+    QLabel *label_3;
+    QComboBox *comboBox_main_axes;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_24;
-    QSpinBox *spinBox_2;
+    QSpinBox *spinBox_speed;
     QTabWidget *tabWidget;
     QWidget *tab;
     QVBoxLayout *verticalLayout;
@@ -253,16 +255,17 @@ public:
         font2.setPointSize(5);
         lcdNumber_2->setFont(font2);
         lcdNumber_2->setStyleSheet(QString::fromUtf8("background: rgb(255, 255, 255)"));
+        lcdNumber_2->setDigitCount(7);
 
         gridLayout_2->addWidget(lcdNumber_2, 1, 2, 1, 2);
 
-        pushButton_22 = new QPushButton(groupBox_2);
-        pushButton_22->setObjectName("pushButton_22");
+        pushButton_extruder_temp_down = new QPushButton(groupBox_2);
+        pushButton_extruder_temp_down->setObjectName("pushButton_extruder_temp_down");
         QFont font3;
         font3.setPointSize(35);
         font3.setStyleStrategy(QFont::PreferAntialias);
-        pushButton_22->setFont(font3);
-        pushButton_22->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
+        pushButton_extruder_temp_down->setFont(font3);
+        pushButton_extruder_temp_down->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
 "                                          border: 1px solid rgb(79, 79, 79);\n"
 "                                          border-radius: 0px;\n"
 "                                          color: rgb(25, 25, 25);\n"
@@ -279,7 +282,7 @@ public:
 "                                          color: rgb(5, 97, 245)\n"
 "										 };"));
 
-        gridLayout_2->addWidget(pushButton_22, 3, 2, 1, 2);
+        gridLayout_2->addWidget(pushButton_extruder_temp_down, 3, 2, 1, 2);
 
         label_17 = new QLabel(groupBox_2);
         label_17->setObjectName("label_17");
@@ -302,18 +305,19 @@ public:
         lcdNumber_3->setSizePolicy(sizePolicy2);
         lcdNumber_3->setFont(font2);
         lcdNumber_3->setStyleSheet(QString::fromUtf8("background: rgb(255, 255, 255)"));
+        lcdNumber_3->setDigitCount(7);
 
         gridLayout_2->addWidget(lcdNumber_3, 1, 4, 1, 2);
 
-        pushButton_23 = new QPushButton(groupBox_2);
-        pushButton_23->setObjectName("pushButton_23");
+        pushButton_extruder_temp_up = new QPushButton(groupBox_2);
+        pushButton_extruder_temp_up->setObjectName("pushButton_extruder_temp_up");
         QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(pushButton_23->sizePolicy().hasHeightForWidth());
-        pushButton_23->setSizePolicy(sizePolicy4);
-        pushButton_23->setFont(font3);
-        pushButton_23->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
+        sizePolicy4.setHeightForWidth(pushButton_extruder_temp_up->sizePolicy().hasHeightForWidth());
+        pushButton_extruder_temp_up->setSizePolicy(sizePolicy4);
+        pushButton_extruder_temp_up->setFont(font3);
+        pushButton_extruder_temp_up->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
 "                                          border: 1px solid rgb(79, 79, 79);\n"
 "                                          border-radius: 0px;\n"
 "                                          color: rgb(25, 25, 25);\n"
@@ -330,38 +334,40 @@ public:
 "                                          color: rgb(5, 97, 245)\n"
 "										 };"));
 
-        gridLayout_2->addWidget(pushButton_23, 2, 2, 1, 2);
+        gridLayout_2->addWidget(pushButton_extruder_temp_up, 2, 2, 1, 2);
 
         lineEdit_send_gcode = new QLineEdit(groupBox_2);
         lineEdit_send_gcode->setObjectName("lineEdit_send_gcode");
         lineEdit_send_gcode->setFont(font);
+        lineEdit_send_gcode->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
 
         gridLayout_2->addWidget(lineEdit_send_gcode, 6, 1, 1, 4);
 
-        label_18 = new QLabel(groupBox_2);
-        label_18->setObjectName("label_18");
-        sizePolicy3.setHeightForWidth(label_18->sizePolicy().hasHeightForWidth());
-        label_18->setSizePolicy(sizePolicy3);
+        label_main_axes = new QLabel(groupBox_2);
+        label_main_axes->setObjectName("label_main_axes");
+        sizePolicy3.setHeightForWidth(label_main_axes->sizePolicy().hasHeightForWidth());
+        label_main_axes->setSizePolicy(sizePolicy3);
         QFont font5;
         font5.setPointSize(25);
         font5.setBold(false);
         font5.setStyleStrategy(QFont::PreferDefault);
-        label_18->setFont(font5);
-        label_18->setLayoutDirection(Qt::LeftToRight);
-        label_18->setStyleSheet(QString::fromUtf8("border:none"));
-        label_18->setAlignment(Qt::AlignCenter);
+        label_main_axes->setFont(font5);
+        label_main_axes->setLayoutDirection(Qt::LeftToRight);
+        label_main_axes->setStyleSheet(QString::fromUtf8("border:none"));
+        label_main_axes->setAlignment(Qt::AlignCenter);
 
-        gridLayout_2->addWidget(label_18, 0, 0, 1, 2);
+        gridLayout_2->addWidget(label_main_axes, 0, 0, 1, 2);
 
-        lcdNumber = new QLCDNumber(groupBox_2);
-        lcdNumber->setObjectName("lcdNumber");
-        sizePolicy2.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
-        lcdNumber->setSizePolicy(sizePolicy2);
-        lcdNumber->setFont(font2);
-        lcdNumber->setStyleSheet(QString::fromUtf8("background: rgb(255, 255, 255)"));
-        lcdNumber->setProperty("intValue", QVariant(5));
+        lcdNumber_main_axes = new QLCDNumber(groupBox_2);
+        lcdNumber_main_axes->setObjectName("lcdNumber_main_axes");
+        sizePolicy2.setHeightForWidth(lcdNumber_main_axes->sizePolicy().hasHeightForWidth());
+        lcdNumber_main_axes->setSizePolicy(sizePolicy2);
+        lcdNumber_main_axes->setFont(font2);
+        lcdNumber_main_axes->setStyleSheet(QString::fromUtf8("background: rgb(255, 255, 255)"));
+        lcdNumber_main_axes->setDigitCount(7);
+        lcdNumber_main_axes->setProperty("intValue", QVariant(0));
 
-        gridLayout_2->addWidget(lcdNumber, 1, 0, 1, 2);
+        gridLayout_2->addWidget(lcdNumber_main_axes, 1, 0, 1, 2);
 
         pushButton_send_gcode = new QPushButton(groupBox_2);
         pushButton_send_gcode->setObjectName("pushButton_send_gcode");
@@ -385,12 +391,12 @@ public:
 
         gridLayout_2->addWidget(pushButton_send_gcode, 6, 5, 1, 1);
 
-        pushButton_20 = new QPushButton(groupBox_2);
-        pushButton_20->setObjectName("pushButton_20");
-        sizePolicy4.setHeightForWidth(pushButton_20->sizePolicy().hasHeightForWidth());
-        pushButton_20->setSizePolicy(sizePolicy4);
-        pushButton_20->setFont(font3);
-        pushButton_20->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
+        pushButton_main_axes_up = new QPushButton(groupBox_2);
+        pushButton_main_axes_up->setObjectName("pushButton_main_axes_up");
+        sizePolicy4.setHeightForWidth(pushButton_main_axes_up->sizePolicy().hasHeightForWidth());
+        pushButton_main_axes_up->setSizePolicy(sizePolicy4);
+        pushButton_main_axes_up->setFont(font3);
+        pushButton_main_axes_up->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
 "                                          border: 1px solid rgb(79, 79, 79);\n"
 "                                          border-radius: 0px;\n"
 "                                          color: rgb(25, 25, 25);\n"
@@ -408,12 +414,12 @@ public:
 "										 };\n"
 ""));
 
-        gridLayout_2->addWidget(pushButton_20, 2, 0, 1, 2);
+        gridLayout_2->addWidget(pushButton_main_axes_up, 2, 0, 1, 2);
 
-        pushButton_21 = new QPushButton(groupBox_2);
-        pushButton_21->setObjectName("pushButton_21");
-        pushButton_21->setFont(font3);
-        pushButton_21->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
+        pushButton_main_axes_down = new QPushButton(groupBox_2);
+        pushButton_main_axes_down->setObjectName("pushButton_main_axes_down");
+        pushButton_main_axes_down->setFont(font3);
+        pushButton_main_axes_down->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
 "                                          border: 1px solid rgb(79, 79, 79);\n"
 "                                          border-radius: 0px;\n"
 "                                          color: rgb(25, 25, 25);\n"
@@ -430,7 +436,7 @@ public:
 "                                          color: rgb(5, 97, 245)\n"
 "										 };"));
 
-        gridLayout_2->addWidget(pushButton_21, 3, 0, 1, 2);
+        gridLayout_2->addWidget(pushButton_main_axes_down, 3, 0, 1, 2);
 
         label_23 = new QLabel(groupBox_2);
         label_23->setObjectName("label_23");
@@ -442,10 +448,10 @@ public:
 
         gridLayout_2->addWidget(label_23, 0, 2, 1, 2);
 
-        pushButton_24 = new QPushButton(groupBox_2);
-        pushButton_24->setObjectName("pushButton_24");
-        pushButton_24->setFont(font3);
-        pushButton_24->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
+        pushButton_bed_temp_down = new QPushButton(groupBox_2);
+        pushButton_bed_temp_down->setObjectName("pushButton_bed_temp_down");
+        pushButton_bed_temp_down->setFont(font3);
+        pushButton_bed_temp_down->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
 "                                          border: 1px solid rgb(79, 79, 79);\n"
 "                                          border-radius: 0px;\n"
 "                                          color: rgb(25, 25, 25);\n"
@@ -462,14 +468,14 @@ public:
 "                                          color: rgb(5, 97, 245)\n"
 "										 };"));
 
-        gridLayout_2->addWidget(pushButton_24, 3, 4, 1, 2);
+        gridLayout_2->addWidget(pushButton_bed_temp_down, 3, 4, 1, 2);
 
-        pushButton_25 = new QPushButton(groupBox_2);
-        pushButton_25->setObjectName("pushButton_25");
-        sizePolicy4.setHeightForWidth(pushButton_25->sizePolicy().hasHeightForWidth());
-        pushButton_25->setSizePolicy(sizePolicy4);
-        pushButton_25->setFont(font3);
-        pushButton_25->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
+        pushButton_bed_temp_up = new QPushButton(groupBox_2);
+        pushButton_bed_temp_up->setObjectName("pushButton_bed_temp_up");
+        sizePolicy4.setHeightForWidth(pushButton_bed_temp_up->sizePolicy().hasHeightForWidth());
+        pushButton_bed_temp_up->setSizePolicy(sizePolicy4);
+        pushButton_bed_temp_up->setFont(font3);
+        pushButton_bed_temp_up->setStyleSheet(QString::fromUtf8("                                          background-color: #FFFFFF;\n"
 "                                          border: 1px solid rgb(79, 79, 79);\n"
 "                                          border-radius: 0px;\n"
 "                                          color: rgb(25, 25, 25);\n"
@@ -486,12 +492,15 @@ public:
 "                                          color: rgb(5, 97, 245)\n"
 "										 };"));
 
-        gridLayout_2->addWidget(pushButton_25, 2, 4, 1, 2);
+        gridLayout_2->addWidget(pushButton_bed_temp_up, 2, 4, 1, 2);
 
         label_127 = new QLabel(groupBox_2);
         label_127->setObjectName("label_127");
-        sizePolicy.setHeightForWidth(label_127->sizePolicy().hasHeightForWidth());
-        label_127->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(label_127->sizePolicy().hasHeightForWidth());
+        label_127->setSizePolicy(sizePolicy5);
         QFont font6;
         font6.setFamilies({QString::fromUtf8("Yu Gothic Medium")});
         font6.setPointSize(12);
@@ -514,20 +523,45 @@ public:
 
         horizontalLayout_3->addWidget(label_4);
 
-        spinBox = new QSpinBox(groupBox_2);
-        spinBox->setObjectName("spinBox");
-        sizePolicy3.setHeightForWidth(spinBox->sizePolicy().hasHeightForWidth());
-        spinBox->setSizePolicy(sizePolicy3);
+        spinBox_shift = new QSpinBox(groupBox_2);
+        spinBox_shift->setObjectName("spinBox_shift");
+        sizePolicy3.setHeightForWidth(spinBox_shift->sizePolicy().hasHeightForWidth());
+        spinBox_shift->setSizePolicy(sizePolicy3);
         QFont font7;
         font7.setPointSize(12);
         font7.setBold(false);
-        spinBox->setFont(font7);
-        spinBox->setMaximum(10000);
-        spinBox->setValue(1);
+        spinBox_shift->setFont(font7);
+        spinBox_shift->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        spinBox_shift->setMaximum(10000);
+        spinBox_shift->setValue(1);
 
-        horizontalLayout_3->addWidget(spinBox);
+        horizontalLayout_3->addWidget(spinBox_shift);
 
+        label_3 = new QLabel(groupBox_2);
+        label_3->setObjectName("label_3");
+        sizePolicy3.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy3);
+        label_3->setFont(font);
+        label_3->setStyleSheet(QString::fromUtf8("border:none\n"
+""));
+
+        horizontalLayout_3->addWidget(label_3);
+
+        comboBox_main_axes = new QComboBox(groupBox_2);
+        comboBox_main_axes->addItem(QString());
+        comboBox_main_axes->addItem(QString());
+        comboBox_main_axes->addItem(QString());
+        comboBox_main_axes->addItem(QString());
+        comboBox_main_axes->setObjectName("comboBox_main_axes");
+        comboBox_main_axes->setFont(font);
+        comboBox_main_axes->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+
+        horizontalLayout_3->addWidget(comboBox_main_axes);
+
+        horizontalLayout_3->setStretch(0, 1);
         horizontalLayout_3->setStretch(1, 7);
+        horizontalLayout_3->setStretch(2, 1);
+        horizontalLayout_3->setStretch(3, 7);
 
         gridLayout_2->addLayout(horizontalLayout_3, 4, 0, 1, 6);
 
@@ -542,15 +576,16 @@ public:
 
         horizontalLayout_4->addWidget(label_24);
 
-        spinBox_2 = new QSpinBox(groupBox_2);
-        spinBox_2->setObjectName("spinBox_2");
-        sizePolicy4.setHeightForWidth(spinBox_2->sizePolicy().hasHeightForWidth());
-        spinBox_2->setSizePolicy(sizePolicy4);
-        spinBox_2->setFont(font);
-        spinBox_2->setMaximum(10000);
-        spinBox_2->setValue(50);
+        spinBox_speed = new QSpinBox(groupBox_2);
+        spinBox_speed->setObjectName("spinBox_speed");
+        sizePolicy4.setHeightForWidth(spinBox_speed->sizePolicy().hasHeightForWidth());
+        spinBox_speed->setSizePolicy(sizePolicy4);
+        spinBox_speed->setFont(font);
+        spinBox_speed->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        spinBox_speed->setMaximum(10000);
+        spinBox_speed->setValue(51);
 
-        horizontalLayout_4->addWidget(spinBox_2);
+        horizontalLayout_4->addWidget(spinBox_speed);
 
         horizontalLayout_4->setStretch(1, 7);
 
@@ -757,22 +792,22 @@ public:
         horizontalLayout_tab_11_1->setContentsMargins(23, -1, 24, -1);
         list_tools_simple_templates = new QComboBox(tab);
         list_tools_simple_templates->setObjectName("list_tools_simple_templates");
-        QSizePolicy sizePolicy5(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(list_tools_simple_templates->sizePolicy().hasHeightForWidth());
-        list_tools_simple_templates->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy6(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(list_tools_simple_templates->sizePolicy().hasHeightForWidth());
+        list_tools_simple_templates->setSizePolicy(sizePolicy6);
         list_tools_simple_templates->setFont(font);
 
         horizontalLayout_tab_11_1->addWidget(list_tools_simple_templates);
 
         pushButton_save_simple_doz = new QPushButton(tab);
         pushButton_save_simple_doz->setObjectName("pushButton_save_simple_doz");
-        QSizePolicy sizePolicy6(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(pushButton_save_simple_doz->sizePolicy().hasHeightForWidth());
-        pushButton_save_simple_doz->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy7(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(pushButton_save_simple_doz->sizePolicy().hasHeightForWidth());
+        pushButton_save_simple_doz->setSizePolicy(sizePolicy7);
         pushButton_save_simple_doz->setFont(font);
         pushButton_save_simple_doz->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "                                          background-color: #FFFFFF;\n"
@@ -795,8 +830,8 @@ public:
 
         pushButton_delete_simple_doz = new QPushButton(tab);
         pushButton_delete_simple_doz->setObjectName("pushButton_delete_simple_doz");
-        sizePolicy6.setHeightForWidth(pushButton_delete_simple_doz->sizePolicy().hasHeightForWidth());
-        pushButton_delete_simple_doz->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(pushButton_delete_simple_doz->sizePolicy().hasHeightForWidth());
+        pushButton_delete_simple_doz->setSizePolicy(sizePolicy7);
         pushButton_delete_simple_doz->setFont(font);
         pushButton_delete_simple_doz->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "                                          background-color: #FFFFFF;\n"
@@ -1023,16 +1058,16 @@ public:
         horizontalLayout_tab_11_->setContentsMargins(23, -1, 24, -1);
         list_tools_imp_templates = new QComboBox(tab_2);
         list_tools_imp_templates->setObjectName("list_tools_imp_templates");
-        sizePolicy5.setHeightForWidth(list_tools_imp_templates->sizePolicy().hasHeightForWidth());
-        list_tools_imp_templates->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(list_tools_imp_templates->sizePolicy().hasHeightForWidth());
+        list_tools_imp_templates->setSizePolicy(sizePolicy6);
         list_tools_imp_templates->setFont(font);
 
         horizontalLayout_tab_11_->addWidget(list_tools_imp_templates);
 
         pushButton_save_imp_doz = new QPushButton(tab_2);
         pushButton_save_imp_doz->setObjectName("pushButton_save_imp_doz");
-        sizePolicy6.setHeightForWidth(pushButton_save_imp_doz->sizePolicy().hasHeightForWidth());
-        pushButton_save_imp_doz->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(pushButton_save_imp_doz->sizePolicy().hasHeightForWidth());
+        pushButton_save_imp_doz->setSizePolicy(sizePolicy7);
         pushButton_save_imp_doz->setFont(font);
         pushButton_save_imp_doz->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "                                          background-color: #FFFFFF;\n"
@@ -1055,8 +1090,8 @@ public:
 
         pushButton_delete_imp_doz = new QPushButton(tab_2);
         pushButton_delete_imp_doz->setObjectName("pushButton_delete_imp_doz");
-        sizePolicy6.setHeightForWidth(pushButton_delete_imp_doz->sizePolicy().hasHeightForWidth());
-        pushButton_delete_imp_doz->setSizePolicy(sizePolicy6);
+        sizePolicy7.setHeightForWidth(pushButton_delete_imp_doz->sizePolicy().hasHeightForWidth());
+        pushButton_delete_imp_doz->setSizePolicy(sizePolicy7);
         pushButton_delete_imp_doz->setFont(font);
         pushButton_delete_imp_doz->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "                                          background-color: #FFFFFF;\n"
@@ -1107,7 +1142,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1128,18 +1163,24 @@ public:
         pushButton_port_connection->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\264\321\201\320\276\320\265\320\264\320\270\320\275\320\270\321\202\321\214", nullptr));
         label_connection_status->setText(QCoreApplication::translate("MainWindow", " \320\236\321\202\320\272\320\273\321\216\321\207\320\265\320\275", nullptr));
         groupBox_2->setTitle(QString());
-        pushButton_22->setText(QCoreApplication::translate("MainWindow", "T1\360\237\241\207", nullptr));
+        pushButton_extruder_temp_down->setText(QCoreApplication::translate("MainWindow", "T1\360\237\241\207", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "T2", nullptr));
-        pushButton_23->setText(QCoreApplication::translate("MainWindow", "T1\360\237\241\205", nullptr));
-        label_18->setText(QCoreApplication::translate("MainWindow", "E", nullptr));
+        pushButton_extruder_temp_up->setText(QCoreApplication::translate("MainWindow", "T1\360\237\241\205", nullptr));
+        label_main_axes->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         pushButton_send_gcode->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
-        pushButton_20->setText(QCoreApplication::translate("MainWindow", "E\360\237\241\205", nullptr));
-        pushButton_21->setText(QCoreApplication::translate("MainWindow", "E\360\237\241\207", nullptr));
+        pushButton_main_axes_up->setText(QCoreApplication::translate("MainWindow", "X\360\237\241\205", nullptr));
+        pushButton_main_axes_down->setText(QCoreApplication::translate("MainWindow", "X\360\237\241\207", nullptr));
         label_23->setText(QCoreApplication::translate("MainWindow", "T1", nullptr));
-        pushButton_24->setText(QCoreApplication::translate("MainWindow", "T2\360\237\241\207", nullptr));
-        pushButton_25->setText(QCoreApplication::translate("MainWindow", "T2\360\237\241\205", nullptr));
+        pushButton_bed_temp_down->setText(QCoreApplication::translate("MainWindow", "T2\360\237\241\207", nullptr));
+        pushButton_bed_temp_up->setText(QCoreApplication::translate("MainWindow", "T2\360\237\241\205", nullptr));
         label_127->setText(QCoreApplication::translate("MainWindow", "G-code", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "\320\250\320\260\320\263", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\207\320\260\321\217 \320\276\321\201\321\214", nullptr));
+        comboBox_main_axes->setItemText(0, QCoreApplication::translate("MainWindow", "X", nullptr));
+        comboBox_main_axes->setItemText(1, QCoreApplication::translate("MainWindow", "Y", nullptr));
+        comboBox_main_axes->setItemText(2, QCoreApplication::translate("MainWindow", "Z", nullptr));
+        comboBox_main_axes->setItemText(3, QCoreApplication::translate("MainWindow", "E", nullptr));
+
         label_24->setText(QCoreApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214", nullptr));
         groupBox_12->setTitle(QCoreApplication::translate("MainWindow", "\320\237\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\200\320\260\320\261\320\276\321\202\321\213", nullptr));
         label_56->setText(QCoreApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214 \320\262\321\213\320\264\320\260\320\262\320\273\320\270\320\262\320\260\320\275\320\270\321\217(\320\274\320\274/\320\274\320\270\320\275)", nullptr));

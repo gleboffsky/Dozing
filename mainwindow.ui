@@ -201,7 +201,7 @@ hr { height: 1px; border-width: 0; }
       <property name="title">
        <string/>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2" rowstretch="10,0,0,0,0,0,0">
+      <layout class="QGridLayout" name="gridLayout_2" rowstretch="10,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0" rowminimumheight="0,0,0,0,0,0,0" columnminimumwidth="0,0,0,0,0,0">
        <item row="1" column="2" colspan="2">
         <widget class="QLCDNumber" name="lcdNumber_2">
          <property name="sizePolicy">
@@ -218,10 +218,13 @@ hr { height: 1px; border-width: 0; }
          <property name="styleSheet">
           <string notr="true">background: rgb(255, 255, 255)</string>
          </property>
+         <property name="digitCount">
+          <number>7</number>
+         </property>
         </widget>
        </item>
        <item row="3" column="2" colspan="2">
-        <widget class="QPushButton" name="pushButton_22">
+        <widget class="QPushButton" name="pushButton_extruder_temp_down">
          <property name="font">
           <font>
            <pointsize>35</pointsize>
@@ -291,10 +294,13 @@ hr { height: 1px; border-width: 0; }
          <property name="styleSheet">
           <string notr="true">background: rgb(255, 255, 255)</string>
          </property>
+         <property name="digitCount">
+          <number>7</number>
+         </property>
         </widget>
        </item>
        <item row="2" column="2" colspan="2">
-        <widget class="QPushButton" name="pushButton_23">
+        <widget class="QPushButton" name="pushButton_extruder_temp_up">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -337,10 +343,13 @@ hr { height: 1px; border-width: 0; }
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
         </widget>
        </item>
        <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="label_18">
+        <widget class="QLabel" name="label_main_axes">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -361,7 +370,7 @@ hr { height: 1px; border-width: 0; }
           <string notr="true">border:none</string>
          </property>
          <property name="text">
-          <string>E</string>
+          <string>X</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -369,7 +378,7 @@ hr { height: 1px; border-width: 0; }
         </widget>
        </item>
        <item row="1" column="0" colspan="2">
-        <widget class="QLCDNumber" name="lcdNumber">
+        <widget class="QLCDNumber" name="lcdNumber_main_axes">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -384,8 +393,11 @@ hr { height: 1px; border-width: 0; }
          <property name="styleSheet">
           <string notr="true">background: rgb(255, 255, 255)</string>
          </property>
+         <property name="digitCount">
+          <number>7</number>
+         </property>
          <property name="intValue" stdset="0">
-          <number>5</number>
+          <number>0</number>
          </property>
         </widget>
        </item>
@@ -420,7 +432,7 @@ hr { height: 1px; border-width: 0; }
         </widget>
        </item>
        <item row="2" column="0" colspan="2">
-        <widget class="QPushButton" name="pushButton_20">
+        <widget class="QPushButton" name="pushButton_main_axes_up">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -453,12 +465,12 @@ hr { height: 1px; border-width: 0; }
 </string>
          </property>
          <property name="text">
-          <string>E🡅</string>
+          <string>X🡅</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
-        <widget class="QPushButton" name="pushButton_21">
+        <widget class="QPushButton" name="pushButton_main_axes_down">
          <property name="font">
           <font>
            <pointsize>35</pointsize>
@@ -484,7 +496,7 @@ hr { height: 1px; border-width: 0; }
 										 };</string>
          </property>
          <property name="text">
-          <string>E🡇</string>
+          <string>X🡇</string>
          </property>
         </widget>
        </item>
@@ -513,7 +525,7 @@ hr { height: 1px; border-width: 0; }
         </widget>
        </item>
        <item row="3" column="4" colspan="2">
-        <widget class="QPushButton" name="pushButton_24">
+        <widget class="QPushButton" name="pushButton_bed_temp_down">
          <property name="font">
           <font>
            <pointsize>35</pointsize>
@@ -544,7 +556,7 @@ hr { height: 1px; border-width: 0; }
         </widget>
        </item>
        <item row="2" column="4" colspan="2">
-        <widget class="QPushButton" name="pushButton_25">
+        <widget class="QPushButton" name="pushButton_bed_temp_up">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -583,7 +595,7 @@ hr { height: 1px; border-width: 0; }
        <item row="6" column="0">
         <widget class="QLabel" name="label_127">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -607,7 +619,7 @@ hr { height: 1px; border-width: 0; }
         </widget>
        </item>
        <item row="4" column="0" colspan="6">
-        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,7">
+        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,7,1,7">
          <item>
           <widget class="QLabel" name="label_4">
            <property name="sizePolicy">
@@ -631,7 +643,7 @@ hr { height: 1px; border-width: 0; }
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox">
+          <widget class="QSpinBox" name="spinBox_shift">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -644,12 +656,69 @@ hr { height: 1px; border-width: 0; }
              <bold>false</bold>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
            <property name="maximum">
             <number>10000</number>
            </property>
            <property name="value">
             <number>1</number>
            </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border:none
+</string>
+           </property>
+           <property name="text">
+            <string>Рабочая ось</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_main_axes">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>X</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Z</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>E</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
@@ -678,7 +747,7 @@ hr { height: 1px; border-width: 0; }
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox_2">
+          <widget class="QSpinBox" name="spinBox_speed">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -690,11 +759,14 @@ hr { height: 1px; border-width: 0; }
              <pointsize>12</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
            <property name="maximum">
             <number>10000</number>
            </property>
            <property name="value">
-            <number>50</number>
+            <number>51</number>
            </property>
           </widget>
          </item>
@@ -723,7 +795,7 @@ hr { height: 1px; border-width: 0; }
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <property name="styleSheet">
