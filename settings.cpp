@@ -8,9 +8,7 @@ Dialog::Dialog(QWidget *parent) :
 {  
     ui->setupUi(this);
     fill_settings();
-}
-
-
+} 
 
 Dialog::~Dialog()
 {
@@ -27,7 +25,7 @@ void Dialog::fill_settings()
         if (!std::filesystem::exists(settings_path)) {
             std::ofstream file;
             file.open(settings_path);
-            file << "COM5\n9600\n0";
+            file << "COM5\n9600";
             file.close();
         }
         file.open(settings_path);
@@ -49,6 +47,6 @@ void Dialog::on_buttonBox_accepted()
     std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\settings.txt";
     std::ofstream file;
     file.open(commands_path);
-    file << ui->comboBox->currentText().toStdString()+"\n" << ui->comboBox_2->currentText().toInt()<<"\n" << ui->lineEdit->text().toInt();
+    file << ui->comboBox->currentText().toStdString()+"\n" << ui->comboBox_2->currentText().toInt()<<"\n";
     file.close();
 }

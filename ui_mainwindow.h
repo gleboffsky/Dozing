@@ -367,6 +367,7 @@ public:
         lcdNumber_main_axes->setDigitCount(7);
         lcdNumber_main_axes->setProperty("intValue", QVariant(0));
 
+
         gridLayout_2->addWidget(lcdNumber_main_axes, 1, 0, 1, 2);
 
         pushButton_send_gcode = new QPushButton(groupBox_2);

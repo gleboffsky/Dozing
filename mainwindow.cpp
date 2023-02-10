@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     update_template_names("imp");
     connect(worker, SIGNAL(valueChanged(QString)), ui->textEdit_console, SLOT(setText(QString)));
     connect(worker, SIGNAL(valueChanged(QString)), this, SLOT(scroll_console_bottom()));
+    connect(worker, SIGNAL(valueChanged(QString)), this, SLOT(update_lcd_telemetry()));
     connect(worker, SIGNAL(workRequested()), thread, SLOT(start()));
     connect(thread, SIGNAL(started()), worker, SLOT(doWork()));
     connect(worker, SIGNAL(finished()), thread, SLOT(quit()), Qt::DirectConnection);
@@ -64,6 +65,13 @@ void MainWindow::save_simple_template(string name)
         update_template_names("simple");
     }   
 }
+
+void MainWindow::update_lcd_telemetry() 
+{
+    ui->lcdNumber_main_axes->display(current_axis_coord);
+    ui->lcdNumber_2->display(current_extruder_temp);
+    ui->lcdNumber_3->display(current_bed_temp);
+};
 
 void MainWindow::update_template_names(std::string kind)
 {
@@ -268,7 +276,6 @@ void MainWindow::on_pushButton_generate_imp_doz_clicked()
     file.close();
 }
 
-
 void MainWindow::on_pushButton_delete_imp_doz_clicked()
 {
     del_temp->change_template_name("imp", ui->list_tools_imp_templates->currentText().toStdString());
@@ -400,6 +407,24 @@ void MainWindow::on_pushButton_bed_temp_down_clicked()
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
     fwrite << "\nM140 S" << current_bed_temp - ui->spinBox_shift->text().toInt();
     current_bed_temp -= ui->spinBox_shift->text().toInt();
+    fwrite.close();
+}
+
+
+void MainWindow::on_pushButton_main_axes_up_clicked()
+{
+    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    fwrite << "\nG1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord + ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString();
+    current_axis_coord += ui->spinBox_shift->text().toInt();
+    fwrite.close();
+}
+
+
+void MainWindow::on_pushButton_main_axes_down_clicked()
+{
+    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    fwrite << "\nG1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord - ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString();
+    current_axis_coord -= ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
 
