@@ -29,8 +29,6 @@ void DeleteTemplate::on_buttonBox_accepted()
 {
 
     if (kind == "simp") {
-        qDebug() << "ITS SIMP";
-        qDebug() << name.c_str();
         std::fstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json", std::fstream::in | std::fstream::out);
         nlohmann::json data = nlohmann::json::parse(fread);
         fread.close();

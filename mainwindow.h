@@ -30,9 +30,9 @@ public:
 private:
     char* user = getenv("username");
     bool status_connection = false;
-    int current_extruder_temp;
-    int current_bed_temp;
-    float current_axis_coord;
+    int current_extruder_temp = 0;
+    int current_bed_temp = 0;
+    float current_axis_coord = 0;
     std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing";
     Ui::MainWindow* ui;
     Dialog settings;
@@ -101,7 +101,7 @@ private slots:
 
     void on_pushButton_main_axes_down_clicked();
 
-    void update_lcd_telemetry();
+    void update_lcd_telemetry(std::string);
 
 signals:
     void prosto_signal();

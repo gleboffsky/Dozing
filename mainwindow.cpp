@@ -19,14 +19,13 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     update_template_names("imp");
     connect(worker, SIGNAL(valueChanged(QString)), ui->textEdit_console, SLOT(setText(QString)));
     connect(worker, SIGNAL(valueChanged(QString)), this, SLOT(scroll_console_bottom()));
-    connect(worker, SIGNAL(valueChanged(QString)), this, SLOT(update_lcd_telemetry()));
+    connect(worker, SIGNAL(data_update(std::string)), this, SLOT(update_lcd_telemetry(std::string)));
     connect(worker, SIGNAL(workRequested()), thread, SLOT(start()));
     connect(thread, SIGNAL(started()), worker, SLOT(doWork()));
     connect(worker, SIGNAL(finished()), thread, SLOT(quit()), Qt::DirectConnection);
     connect(save_temp, SIGNAL(save_simple_confirm(std::string)), this, SLOT(save_simple_template(std::string)));
     connect(save_temp, SIGNAL(save_imp_confirm(std::string)), this, SLOT(save_imp_template(std::string)));
     connect(del_temp, SIGNAL(template_deleted(std::string)), this, SLOT(update_template_names(std::string)));
-
 }
 
 MainWindow::~MainWindow()
@@ -42,7 +41,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::save_simple_template(string name)
 {
-    qDebug() << "DQWEQWEWQE";
+
     if (name != "") {
         ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
         nlohmann::json data = nlohmann::json::parse(fread);
@@ -66,11 +65,13 @@ void MainWindow::save_simple_template(string name)
     }   
 }
 
-void MainWindow::update_lcd_telemetry() 
+void MainWindow::update_lcd_telemetry(string coord) 
 {
+    current_axis_coord = std::stof(coord); //to float
     ui->lcdNumber_main_axes->display(current_axis_coord);
     ui->lcdNumber_2->display(current_extruder_temp);
     ui->lcdNumber_3->display(current_bed_temp);
+
 };
 
 void MainWindow::update_template_names(std::string kind)
@@ -169,6 +170,7 @@ void MainWindow::check_status()
 
 void MainWindow::clear_files()
 {
+
     std::filesystem::create_directory(commands_path);
     std::ofstream file;
     file.open(commands_path+"\\scenario.txt");
@@ -210,7 +212,7 @@ void MainWindow::on_pushButton_generate_simple_doz_clicked()
     string bed_temp = ui->lineEdit_desktop_temperature->text().toStdString();
     // ��� �������� ����� : ��� ������� ������� ����� -- ���, ������� ������ ����� ����������������� �������� �� ������ ���.
     // ����� ��� ���� ������ �� ��������� ��������� � ����� ��������� ������ ������ ��� ��������
-    string gcode_head = "\nG92 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
+    string gcode_head = "G92 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
     string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
     while (work_coord > 0) {
         work_coord = work_coord - drop_offset;
@@ -222,7 +224,7 @@ void MainWindow::on_pushButton_generate_simple_doz_clicked()
     }
     std::ofstream file;
     file.open(commands_path + "\\scenario.txt", std::ios::app);
-    file << gcode_head + gcode_str;
+    file << gcode_head + gcode_str + "\n";
     file.close();
 }
 
@@ -248,8 +250,9 @@ void MainWindow::on_pushButton_generate_imp_doz_clicked()
     // ��� �������� ����� : ��� ������� ������� ����� -- ���, ������� ������ ����� ����������������� �������� �� ������ ���.
     // ����� ��� ���� ������ �� ��������� ��������� � ����� ��������� ������ ������ ��� ��������
     //float pause_speed = drop_offset / drop_pause * 60;
-    string gcode_head = "\nG92 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
+    string gcode_head = "G92 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
     string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
+
     if (mode == mode_inter_cycle) {
         pause_inter_cycle = true;
     }
@@ -272,7 +275,7 @@ void MainWindow::on_pushButton_generate_imp_doz_clicked()
 
     std::ofstream file;
     file.open(commands_path + "\\scenario.txt", std::ios::app);
-    file << gcode_head + gcode_str;
+    file << gcode_head + gcode_str + "\n";
     file.close();
 }
 
@@ -306,9 +309,8 @@ void MainWindow::on_pushButton_send_gcode_clicked()
         string s1 = ui->lineEdit_send_gcode->text().toStdString();
         transform(s1.begin(), s1.end(), s1.begin(), ::toupper);
         std::ofstream f(commands_path + "\\scenario.txt", std::ios::app);
-        f << "\n" + s1;
+        f << s1 + "\n";
         f.close();
-
     }
 }
 
@@ -378,7 +380,7 @@ void MainWindow::on_list_tools_imp_templates_textActivated(const QString& arg1)
 void MainWindow::on_pushButton_extruder_temp_up_clicked()
 {
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
-    fwrite << "\nM104 S" << current_extruder_temp + ui->spinBox_shift->text().toInt();
+    fwrite << "M104 S" << current_extruder_temp + ui->spinBox_shift->text().toInt() << "\n";
     current_extruder_temp += ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
@@ -387,7 +389,7 @@ void MainWindow::on_pushButton_extruder_temp_up_clicked()
 void MainWindow::on_pushButton_extruder_temp_down_clicked()
 {
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
-    fwrite << "\nM104 S" << current_extruder_temp - ui->spinBox_shift->text().toInt();
+    fwrite << "M104 S" << current_extruder_temp - ui->spinBox_shift->text().toInt() << "\n";
     current_extruder_temp -= ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
@@ -396,7 +398,7 @@ void MainWindow::on_pushButton_extruder_temp_down_clicked()
 void MainWindow::on_pushButton_bed_temp_up_clicked()
 {
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
-    fwrite << "\nM140 S" << current_bed_temp + ui->spinBox_shift->text().toInt();
+    fwrite << "M140 S" << current_bed_temp + ui->spinBox_shift->text().toInt() << "\n";
     current_bed_temp += ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
@@ -405,7 +407,7 @@ void MainWindow::on_pushButton_bed_temp_up_clicked()
 void MainWindow::on_pushButton_bed_temp_down_clicked()
 {
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
-    fwrite << "\nM140 S" << current_bed_temp - ui->spinBox_shift->text().toInt();
+    fwrite << "M140 S" << current_bed_temp - ui->spinBox_shift->text().toInt() << "\n";
     current_bed_temp -= ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
@@ -414,7 +416,7 @@ void MainWindow::on_pushButton_bed_temp_down_clicked()
 void MainWindow::on_pushButton_main_axes_up_clicked()
 {
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
-    fwrite << "\nG1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord + ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString();
+    fwrite << "G1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord + ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString() + "\n";
     current_axis_coord += ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
@@ -423,7 +425,7 @@ void MainWindow::on_pushButton_main_axes_up_clicked()
 void MainWindow::on_pushButton_main_axes_down_clicked()
 {
     ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
-    fwrite << "\nG1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord - ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString();
+    fwrite << "G1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord - ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString() + "\n";
     current_axis_coord -= ui->spinBox_shift->text().toInt();
     fwrite.close();
 }

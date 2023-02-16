@@ -25,8 +25,6 @@ public:
     void abort();
     bool connection_status;
 
-
-
 private:
 
     /**
@@ -37,7 +35,6 @@ private:
      * @brief @em true when Worker is doing work
      */
     bool _working;
-
     /**
      * @brief Protects access to #_abort
      */
@@ -58,17 +55,15 @@ signals:
      * @brief This signal is emitted when process is finished (either by counting 60 sec or being aborted)
      */
     void finished();
+    void data_update(std::string);
 
 
 
 public slots:
-    /**
-     * @brief Does something
-     *
-     * Counts 60 sec in this example.
-     * Counting is interrupted if #_aborted is set to true.
-     */
+
     void doWork();
+
+    void monitoring_coordinates(std::string current_command);
 
 };
 

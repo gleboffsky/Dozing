@@ -18,8 +18,6 @@ Worker::Worker(QObject* parent) :
     connection_status = false;
 }
 
-
-
 void Worker::requestWork()
 {
     mutex.lock();
@@ -27,7 +25,6 @@ void Worker::requestWork()
     _abort = false;
     qDebug() << "Request worker start in Thread " << thread()->currentThreadId();
     mutex.unlock();
-
     emit workRequested();
 }
 
@@ -50,6 +47,22 @@ std::string gcode_csum(std::string command) {
         cs = cs ^ (int)command[i];
     }
     return std::to_string(cs);
+}
+
+void Worker::monitoring_coordinates(std::string current_command)
+{
+    std::string main_axis;
+    std::stringstream ss(current_command);
+    std::istream_iterator<std::string> begin(ss);
+    std::istream_iterator<std::string> end;
+    std::vector<std::string> vstrings(begin, end);
+    for (int i = 0; i < vstrings.size(); i++) {
+        if (vstrings[i][0] == 'X' or vstrings[i][0] == 'Y' or vstrings[i][0] == 'Z' or vstrings[i][0] == 'E') {
+            vstrings[i].erase(vstrings[i].begin());
+            main_axis = vstrings[i];
+            emit data_update(main_axis);
+        }
+    }
 }
 
 void Worker::doWork()
@@ -135,6 +148,7 @@ void Worker::doWork()
                     if (list_of_commands[number_file_command] != "") {
                         std::string serial_command = "N" + std::to_string(number_serial_command) + " " + list_of_commands[number_file_command] + "*" + gcode_csum("N" + std::to_string(number_serial_command) + " " + list_of_commands[number_file_command]) + "\n";
                         serial.write(serial_command.c_str(), serial_command.size());
+                        monitoring_coordinates(list_of_commands[number_file_command]);
                         qDebug() << "serial_command" << QString::fromStdString(serial_command);
                     }
                     number_serial_command++;
