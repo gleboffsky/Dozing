@@ -18,6 +18,9 @@ Dialog::~Dialog()
 void Dialog::fill_settings()
 {
     try {
+        if (!std::filesystem::exists("C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing")) {
+            std::filesystem::create_directory("C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing");
+        }
         std::vector<std::string> list_of_settings;
         std::string var;
         std::ifstream file;
@@ -36,8 +39,9 @@ void Dialog::fill_settings()
         ui->comboBox->setCurrentText(QString::fromStdString(list_of_settings[0]));
         ui->comboBox_2->setCurrentText(QString::fromStdString(list_of_settings[1]));
     }
-    catch(...){
-        qDebug() << "fill_settings error!";
+    catch(const std::exception & ex){
+        qDebug() << "fill_settings error!" << ex.what();
+
     }
 }
 
