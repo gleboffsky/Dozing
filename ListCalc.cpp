@@ -71,9 +71,6 @@ void Worker::doWork()
     try {
         std::ofstream file;
         std::ifstream settings_file;
-        char* user = getenv("username");
-        std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\scenario.txt";
-        std::string settings_path = "C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing\\settings.txt";
         file.open(commands_path);
         file << "";
         file.close();
@@ -120,7 +117,7 @@ void Worker::doWork()
                 emit finished();
                 break;
             }
-            
+ 
             if (serial.waitForReadyRead(100)) {
                 QByteArray responseData = serial.readAll();
                 QString response(responseData);
@@ -131,10 +128,8 @@ void Worker::doWork()
                     emit valueChanged(serdata);
                 }
                 shipping_available = true;
-
             }
-
-            std::ifstream t("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt");
+            std::ifstream t("C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\scenario.txt");
             std::stringstream buffer;
             buffer << t.rdbuf();
             std::stringstream ss(buffer.str());
@@ -171,5 +166,4 @@ void Worker::doWork()
         emit finished();
         qDebug() << ex.what();
     }
-
 }

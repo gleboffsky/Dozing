@@ -29,11 +29,11 @@ void DeleteTemplate::on_buttonBox_accepted()
 {
 
     if (kind == "simp") {
-        std::fstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json", std::fstream::in | std::fstream::out);
+        std::fstream fread(commands_path + "\\simple_templates.json", std::fstream::in | std::fstream::out);
         nlohmann::json data = nlohmann::json::parse(fread);
         fread.close();
         data.erase(name);
-        std::ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        std::ofstream fwrite(commands_path + "\\simple_templates.json");
         fwrite << data;
         fwrite.close();
         emit template_deleted("simple");
@@ -42,11 +42,11 @@ void DeleteTemplate::on_buttonBox_accepted()
     }
     else {
 
-        std::ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        std::ifstream fread(commands_path + "\\imp_templates.json");
         nlohmann::json data = nlohmann::json::parse(fread);
         fread.close();
         data.erase(name);
-        std::ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        std::ofstream fwrite(commands_path + "\\imp_templates.json");
         fwrite << data;
         fwrite.close();
         emit template_deleted("imp");

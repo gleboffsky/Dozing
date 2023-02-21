@@ -2,11 +2,15 @@
 #include "ui_settings.h"
 #include <fstream>
 #include <filesystem>
+
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {  
     ui->setupUi(this);
+    if (!std::filesystem::exists("C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing")) {
+        std::filesystem::create_directory("C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing");
+    }
     fill_settings();
 } 
 
@@ -36,15 +40,15 @@ void Dialog::fill_settings()
         ui->comboBox->setCurrentText(QString::fromStdString(list_of_settings[0]));
         ui->comboBox_2->setCurrentText(QString::fromStdString(list_of_settings[1]));
     }
-    catch(...){
-        qDebug() << "fill_settings error!";
+    catch(const std::exception & ex){
+        qDebug() << "fill_settings error!" << ex.what();
+
     }
 }
 
 void Dialog::on_buttonBox_accepted()
 {
-    char* user = getenv("username");
-    std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\settings.txt";
+    std::string commands_path = "C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing\\settings.txt";
     std::ofstream file;
     file.open(commands_path);
     file << ui->comboBox->currentText().toStdString()+"\n" << ui->comboBox_2->currentText().toInt()<<"\n";

@@ -24,6 +24,8 @@ private:
     std::string name;
     std::string kind;
     Ui::DeleteTemplate *ui;
+    char* user = getenv("username");
+    std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing";
 
 public slots:
     void change_template_name(std::string kind, std::string name);

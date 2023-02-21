@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <map>
 using namespace std;
 
 
@@ -43,7 +44,7 @@ void MainWindow::save_simple_template(string name)
 {
 
     if (name != "") {
-        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        ifstream fread(commands_path + "\\simple_templates.json");
         nlohmann::json data = nlohmann::json::parse(fread);
         data.push_back({ name, {
         {"drop_volume", ui->lineEdit_drop_volume->text().toStdString()},
@@ -57,7 +58,7 @@ void MainWindow::save_simple_template(string name)
         {"working_axis_simp", ui->comboBox_working_axis_simp->currentText().toStdString()}
       } });
         fread.close();
-        ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        ofstream fwrite(commands_path + "\\simple_templates.json");
         fwrite << data;
         fwrite.close();
 
@@ -78,7 +79,7 @@ void MainWindow::update_template_names(std::string kind)
 {
     if (kind == "simple") {
         QStringList list;
-        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+        ifstream fread(commands_path + "\\simple_templates.json");
         nlohmann::json data = nlohmann::json::parse(fread);
 
         for (auto it = std::begin(data); it != std::end(data); ++it) {
@@ -91,7 +92,7 @@ void MainWindow::update_template_names(std::string kind)
 
     if (kind == "imp") {
         QStringList list;
-        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        ifstream fread(commands_path + "\\imp_templates.json");
         nlohmann::json data = nlohmann::json::parse(fread);
 
         for (auto it = std::begin(data); it != std::end(data); ++it) {
@@ -106,7 +107,7 @@ void MainWindow::update_template_names(std::string kind)
 void MainWindow::save_imp_template(std::string name)
 {
     if (name != "") {
-        ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        ifstream fread(commands_path + "\\imp_templates.json");
         nlohmann::json data = nlohmann::json::parse(fread);
         data.push_back({ name, {
         {"drop_volume", ui->lineEdit_drop_volume_imp->text().toStdString()},
@@ -122,7 +123,7 @@ void MainWindow::save_imp_template(std::string name)
         {"kind_of_pause", ui->comboBox_imp_pause->currentText().toStdString()}
       } });
         fread.close();
-        ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+        ofstream fwrite(commands_path + "\\imp_templates.json");
         fwrite << data;
         fwrite.close();
 
@@ -138,16 +139,16 @@ void MainWindow::scroll_console_bottom()
 
 void MainWindow::creating_json()
 {
-    #include <map>
-    if (!std::filesystem::exists("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json")) {
-        std::ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+
+    if (!std::filesystem::exists(commands_path + "\\simple_templates.json")) {
+        std::ofstream fwrite(commands_path + "\\simple_templates.json");
         string sample = "{}";
         fwrite << sample;
         fwrite.close();
     }
 
-    if (!std::filesystem::exists("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json")) {
-        std::ofstream fwrite_imp("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+    if (!std::filesystem::exists(commands_path + "\\imp_templates.json")) {
+        std::ofstream fwrite_imp(commands_path + "\\imp_templates.json");
         string sample_imp = "{}";
         fwrite_imp << sample_imp;
         fwrite_imp.close();
@@ -166,16 +167,15 @@ void MainWindow::check_status()
     }
 }
 
-
-
 void MainWindow::clear_files()
 {
-
-    std::filesystem::create_directory(commands_path);
-    std::ofstream file;
-    file.open(commands_path+"\\scenario.txt");
-    file << "";
-    file.close();
+    if (!std::filesystem::exists(commands_path)) {
+        std::filesystem::create_directory(commands_path);
+        std::ofstream file;
+        file.open(commands_path + "\\scenario.txt");
+        file << "";
+        file.close();
+    }
 }
 
 void MainWindow::on_pushButton_port_connection_clicked()
@@ -340,7 +340,7 @@ void MainWindow::on_comboBox_main_axes_currentTextChanged(const QString& arg1)
 
 void MainWindow::on_list_tools_simple_templates_textActivated(const QString& arg1)
 {
-    ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\simple_templates.json");
+    ifstream fread(commands_path + "\\simple_templates.json");
     nlohmann::json data = nlohmann::json::parse(fread);
 
     ui->lineEdit_drop_volume->setText(QString::fromStdString(data[ui->list_tools_simple_templates->currentText().toStdString()]["drop_volume"]));
@@ -359,7 +359,7 @@ void MainWindow::on_list_tools_simple_templates_textActivated(const QString& arg
 void MainWindow::on_list_tools_imp_templates_textActivated(const QString& arg1)
 {
 
-    ifstream fread("C:\\Users\\betterty\\Documents\\Dozing\\imp_templates.json");
+    ifstream fread(commands_path + "\\imp_templates.json");
     nlohmann::json data = nlohmann::json::parse(fread);
 
     ui->lineEdit_drop_volume_imp->setText(QString::fromStdString(data[ui->list_tools_imp_templates->currentText().toStdString()]["drop_volume"]));
@@ -379,7 +379,7 @@ void MainWindow::on_list_tools_imp_templates_textActivated(const QString& arg1)
 
 void MainWindow::on_pushButton_extruder_temp_up_clicked()
 {
-    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    ofstream fwrite(commands_path + "\\scenario.txt", ios::app);
     fwrite << "M104 S" << current_extruder_temp + ui->spinBox_shift->text().toInt() << "\n";
     current_extruder_temp += ui->spinBox_shift->text().toInt();
     fwrite.close();
@@ -388,7 +388,7 @@ void MainWindow::on_pushButton_extruder_temp_up_clicked()
 
 void MainWindow::on_pushButton_extruder_temp_down_clicked()
 {
-    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    ofstream fwrite(commands_path + "\\scenario.txt", ios::app);
     fwrite << "M104 S" << current_extruder_temp - ui->spinBox_shift->text().toInt() << "\n";
     current_extruder_temp -= ui->spinBox_shift->text().toInt();
     fwrite.close();
@@ -397,7 +397,7 @@ void MainWindow::on_pushButton_extruder_temp_down_clicked()
 
 void MainWindow::on_pushButton_bed_temp_up_clicked()
 {
-    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    ofstream fwrite(commands_path + "\\scenario.txt", ios::app);
     fwrite << "M140 S" << current_bed_temp + ui->spinBox_shift->text().toInt() << "\n";
     current_bed_temp += ui->spinBox_shift->text().toInt();
     fwrite.close();
@@ -406,7 +406,7 @@ void MainWindow::on_pushButton_bed_temp_up_clicked()
 
 void MainWindow::on_pushButton_bed_temp_down_clicked()
 {
-    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    ofstream fwrite(commands_path + "\\scenario.txt", ios::app);
     fwrite << "M140 S" << current_bed_temp - ui->spinBox_shift->text().toInt() << "\n";
     current_bed_temp -= ui->spinBox_shift->text().toInt();
     fwrite.close();
@@ -415,7 +415,7 @@ void MainWindow::on_pushButton_bed_temp_down_clicked()
 
 void MainWindow::on_pushButton_main_axes_up_clicked()
 {
-    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    ofstream fwrite(commands_path + "\\scenario.txt", ios::app);
     fwrite << "G1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord + ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString() + "\n";
     current_axis_coord += ui->spinBox_shift->text().toInt();
     fwrite.close();
@@ -424,7 +424,7 @@ void MainWindow::on_pushButton_main_axes_up_clicked()
 
 void MainWindow::on_pushButton_main_axes_down_clicked()
 {
-    ofstream fwrite("C:\\Users\\betterty\\Documents\\Dozing\\scenario.txt", ios::app);
+    ofstream fwrite(commands_path + "\\scenario.txt", ios::app);
     fwrite << "G1 " + ui->comboBox_main_axes->currentText().toStdString() << current_axis_coord - ui->spinBox_shift->text().toInt() << " F" + ui->spinBox_speed->text().toStdString() + "\n";
     current_axis_coord -= ui->spinBox_shift->text().toInt();
     fwrite.close();

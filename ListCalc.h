@@ -40,6 +40,10 @@ private:
      */
     QMutex mutex;
 
+    char* user = getenv("username");
+    std::string commands_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\scenario.txt";
+    std::string settings_path = "C:\\Users\\" + std::string(user) + "\\Documents\\Dozing\\settings.txt";
+
 
 signals:
     /**
