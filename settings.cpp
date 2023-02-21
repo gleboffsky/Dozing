@@ -22,6 +22,9 @@ Dialog::~Dialog()
 void Dialog::fill_settings()
 {
     try {
+        if (!std::filesystem::exists("C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing")) {
+            std::filesystem::create_directory("C:\\Users\\" + std::string(getenv("username")) + "\\Documents\\Dozing");
+        }
         std::vector<std::string> list_of_settings;
         std::string var;
         std::ifstream file;
