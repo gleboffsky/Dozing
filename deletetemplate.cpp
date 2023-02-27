@@ -17,14 +17,12 @@ DeleteTemplate::~DeleteTemplate()
 
 
 void DeleteTemplate::change_template_name(std::string input_kind, std::string input_name) {
-    if (kind == "simp") {
-        ui->label->setText("\xd0\xa3\xd0\xb4\xd0\xb0\xd0\xbb\xd0\xb8\xd1\x82\xd1\x8c \xd0\xbf\xd1\x80\xd0\xbe\xd1\x81\xd1\x82\xd0\xbe\xd0\xb5 \xd0\xb4\xd0\xbe\xd0\xb7\xd0\xb8\xd1\x80\xd0\xbe\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5");
-    }
-    else {
-        ui->label->setText("\xd0\xa3\xd0\xb4\xd0\xb0\xd0\xbb\xd0\xb8\xd1\x82\xd1\x8c \xd0\xb8\xd0\xbc\xd0\xbf\xd1\x83\xd0\xbb\xd1\x8c\xd1\x81\xd0\xbd\xd0\xbe\xd0\xb5 \xd0\xb4\xd0\xbe\xd0\xb7\xd0\xb8\xd1\x80\xd0\xbe\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5");
-    }
+
+    QString str = QString::fromStdString(input_name);
+    ui->label->setText("\xd0\xa2\xd0\xbe\xd1\x87\xd0\xbd\xd0\xbe \xd1\x83\xd0\xb4\xd0\xb0\xd0\xbb\xd0\xb8\xd1\x82\xd1\x8c " + str + "?");
     name = input_name;
     kind = input_kind;
+    
 }
 void DeleteTemplate::on_buttonBox_accepted()
 {
@@ -39,7 +37,6 @@ void DeleteTemplate::on_buttonBox_accepted()
         fwrite.close();
         emit template_deleted("simple");
         close();
-
     }
     else {
 
@@ -52,7 +49,9 @@ void DeleteTemplate::on_buttonBox_accepted()
         fwrite.close();
         emit template_deleted("imp");
         close();
-
     }
 }
 
+void DeleteTemplate::on_buttonBox_rejected() {
+    close();
+}

@@ -32,6 +32,7 @@ public slots:
 
 private slots:
     void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 };
 
 #endif // DELETETEMPLATE_H

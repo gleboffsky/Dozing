@@ -176,7 +176,7 @@ public:
 
         progressBar = new QProgressBar(centralwidget);
         progressBar->setObjectName("progressBar");
-        progressBar->setValue(24);
+        progressBar->setValue(0);
 
         horizontalLayout->addWidget(progressBar);
 

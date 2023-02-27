@@ -34,7 +34,7 @@ public:
     {
         if (DeleteTemplate->objectName().isEmpty())
             DeleteTemplate->setObjectName("DeleteTemplate");
-        DeleteTemplate->resize(581, 250);
+        DeleteTemplate->resize(566, 228);
         gridLayout = new QGridLayout(DeleteTemplate);
         gridLayout->setObjectName("gridLayout");
         groupBox = new QGroupBox(DeleteTemplate);
