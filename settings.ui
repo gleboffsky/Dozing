@@ -11,7 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Настройки</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/Dozing.png</normaloff>
+    <normalon>:/Dozing.png</normalon>:/Dozing.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
@@ -49,35 +54,6 @@
           <property name="horizontalSpacing">
            <number>12</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="comboBox">
-            <item>
-             <property name="text">
-              <string>COM1</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>COM2</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>COM3</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>COM4</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>COM5</string>
-             </property>
-            </item>
-           </widget>
-          </item>
           <item row="0" column="3">
            <widget class="QComboBox" name="comboBox_2">
             <item>
@@ -177,22 +153,6 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Скорость:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label">
             <property name="sizePolicy">
@@ -209,6 +169,54 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Скорость:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox">
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>COM1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>COM2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>COM3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>COM4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>COM5</string>
+             </property>
+            </item>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -223,7 +231,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

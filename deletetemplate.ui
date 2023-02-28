@@ -6,12 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>581</width>
-    <height>250</height>
+    <width>566</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Удаление</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/Dozing.png</normalon>
+   </iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

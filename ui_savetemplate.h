@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'savetemplate.ui'
 **
-** Created by: Qt User Interface Compiler version 6.4.2
+** Created by: Qt User Interface Compiler version 6.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -58,6 +58,8 @@ public:
         buttonBox->setGeometry(QRect(360, 190, 193, 29));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        Dialog->setWindowIcon(QIcon(":/Dozing.png"));
+
 
         retranslateUi(Dialog);
         QObject::connect(buttonBox, &QDialogButtonBox::accepted, Dialog, qOverload<>(&QDialog::accept));
@@ -68,7 +70,7 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "Dialog", nullptr));
+        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "\320\241\320\276\321\205\321\200\320\260\320\275\320\265\320\275\320\270\320\265", nullptr));
         label->setText(QCoreApplication::translate("Dialog", "\320\241\320\276\321\205\321\200\320\260\320\275\320\265\320\275\320\270\320\265 \320\270\320\274\320\277\321\203\320\273\321\214\321\201\320\275\320\276\320\263\320\276 \320\264\320\276\320\267\320\270\321\200\320\276\320\262\320\260\320\275\320\270\321\217", nullptr));
         label_2->setText(QCoreApplication::translate("Dialog", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", nullptr));
     } // retranslateUi

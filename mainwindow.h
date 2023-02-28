@@ -55,6 +55,8 @@ private slots:
     void on_pushButton_generate_imp_doz_clicked();
     
     void on_action_triggered();
+
+    void on_action_2_triggered();
     
     void clear_files();
     

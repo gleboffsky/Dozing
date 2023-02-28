@@ -10,6 +10,7 @@
 #define UI_DELETETEMPLATE_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QAbstractButton>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
@@ -35,6 +36,9 @@ public:
         if (DeleteTemplate->objectName().isEmpty())
             DeleteTemplate->setObjectName("DeleteTemplate");
         DeleteTemplate->resize(566, 228);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/Dozing.png"), QSize(), QIcon::Normal, QIcon::On);
+        DeleteTemplate->setWindowIcon(icon);
         gridLayout = new QGridLayout(DeleteTemplate);
         gridLayout->setObjectName("gridLayout");
         groupBox = new QGroupBox(DeleteTemplate);
@@ -60,6 +64,7 @@ public:
 
         gridLayout->addWidget(buttonBox, 1, 0, 1, 1);
 
+        DeleteTemplate->setWindowIcon(QIcon(":/Dozing.png"));
 
         retranslateUi(DeleteTemplate);
 
@@ -68,7 +73,7 @@ public:
 
     void retranslateUi(QDialog *DeleteTemplate)
     {
-        DeleteTemplate->setWindowTitle(QCoreApplication::translate("DeleteTemplate", "Dialog", nullptr));
+        DeleteTemplate->setWindowTitle(QCoreApplication::translate("DeleteTemplate", "\320\243\320\264\320\260\320\273\320\265\320\275\320\270\320\265", nullptr));
         groupBox->setTitle(QString());
         label->setText(QCoreApplication::translate("DeleteTemplate", "\320\222\321\213 \320\264\320\265\320\271\321\201\321\202\320\262\320\270\321\202\320\265\320\273\321\214\320\275\320\276 \321\205\320\276\321\202\320\270\321\202\320\265 \321\203\320\264\320\260\320\273\320\270\321\202\321\214?", nullptr));
     } // retranslateUi

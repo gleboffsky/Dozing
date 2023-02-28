@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
@@ -37,6 +38,7 @@ class Ui_MainWindow
 {
 public:
     QAction *action;
+    QAction *action_2;
     QWidget *centralwidget;
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout;
@@ -146,10 +148,15 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(1297, 758));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/Dozing.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setDockNestingEnabled(false);
         action = new QAction(MainWindow);
         action->setObjectName("action");
+        action_2 = new QAction(MainWindow);
+        action_2->setObjectName("action_2");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setEnabled(true);
@@ -1138,6 +1145,7 @@ public:
 
         menubar->addAction(menu->menuAction());
         menubar->addAction(menu_2->menuAction());
+        menu->addAction(action_2);
         menu_2->addAction(action);
 
         retranslateUi(MainWindow);
@@ -1150,15 +1158,16 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Dozing", nullptr));
         action->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
+        action_2->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "\320\223\320\276\321\202\320\276\320\262\320\275\320\276\321\201\321\202\321\214", nullptr));
         textEdit_console->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt;\">CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE CONSOLE </span></p></body></html>", nullptr));
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         groupBox->setTitle(QString());
         pushButton_port_connection->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\264\321\201\320\276\320\265\320\264\320\270\320\275\320\270\321\202\321\214", nullptr));
         label_connection_status->setText(QCoreApplication::translate("MainWindow", " \320\236\321\202\320\272\320\273\321\216\321\207\320\265\320\275", nullptr));
@@ -1174,14 +1183,14 @@ public:
         pushButton_bed_temp_down->setText(QCoreApplication::translate("MainWindow", "T2\360\237\241\207", nullptr));
         pushButton_bed_temp_up->setText(QCoreApplication::translate("MainWindow", "T2\360\237\241\205", nullptr));
         label_127->setText(QCoreApplication::translate("MainWindow", "G-code", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "\320\250\320\260\320\263", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "\320\250\320\260\320\263(\320\274\320\274)", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\207\320\260\321\217 \320\276\321\201\321\214", nullptr));
         comboBox_main_axes->setItemText(0, QCoreApplication::translate("MainWindow", "X", nullptr));
         comboBox_main_axes->setItemText(1, QCoreApplication::translate("MainWindow", "Y", nullptr));
         comboBox_main_axes->setItemText(2, QCoreApplication::translate("MainWindow", "Z", nullptr));
         comboBox_main_axes->setItemText(3, QCoreApplication::translate("MainWindow", "E", nullptr));
 
-        label_24->setText(QCoreApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214(\320\274\320\274/\320\274\320\270\320\275)", nullptr));
         groupBox_12->setTitle(QCoreApplication::translate("MainWindow", "\320\237\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\200\320\260\320\261\320\276\321\202\321\213", nullptr));
         label_56->setText(QCoreApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214 \320\262\321\213\320\264\320\260\320\262\320\273\320\270\320\262\320\260\320\275\320\270\321\217(\320\274\320\274/\320\274\320\270\320\275)", nullptr));
         label_36->setText(QCoreApplication::translate("MainWindow", "\320\236\320\261\321\212\320\265\320\274 \320\272\320\260\320\277\320\273\320\270(\320\274\320\272\320\273)", nullptr));

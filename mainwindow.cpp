@@ -195,6 +195,11 @@ void MainWindow::on_action_triggered()
     settings.show();
 }
 
+void MainWindow::on_action_2_triggered() 
+{
+    close();
+}
+
 void MainWindow::on_pushButton_generate_simple_doz_clicked() 
 {   
 
