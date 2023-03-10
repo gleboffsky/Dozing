@@ -218,7 +218,13 @@ void MainWindow::on_pushButton_generate_simple_doz_clicked()
     // ��� �������� ����� : ��� ������� ������� ����� -- ���, ������� ������ ����� ����������������� �������� �� ������ ���.
     // ����� ��� ���� ������ �� ��������� ��������� � ����� ��������� ������ ������ ��� ��������
     string gcode_head = "G92 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
-    string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
+    string gcode_str = "";
+    if (ui->lineEdit_desktop_temperature->text() != "") {
+        gcode_str += ("\nM190 S" + bed_temp);
+    }
+    if (ui->lineEdit_extruder_temperature->text() != "") {
+        gcode_str += ("\nM109 S" + extruder_temp);
+    }
     while (work_coord > 0) {
         work_coord = work_coord - drop_offset;
         gcode_str = gcode_str + '\n' + "G1 " + ui->comboBox_working_axis_simp->currentText().toStdString() + to_string(work_coord).erase(to_string(work_coord).size() - 3) + " F" + to_string(drop_speed); // ������� ��������
@@ -256,7 +262,13 @@ void MainWindow::on_pushButton_generate_imp_doz_clicked()
     // ����� ��� ���� ������ �� ��������� ��������� � ����� ��������� ������ ������ ��� ��������
     //float pause_speed = drop_offset / drop_pause * 60;
     string gcode_head = "G92 " + ui->comboBox_working_axis_imp->currentText().toStdString() + to_string(start_coord).erase(to_string(start_coord).size() - 3);
-    string gcode_str = ("\nM190 S" + bed_temp) + ("\nM109 S" + extruder_temp);
+    string gcode_str = "";
+    if (ui->lineEdit_desktop_temperature_imp->text() != "") {
+        gcode_str += ("\nM190 S" + bed_temp);
+    }
+    if (ui->lineEdit_extruder_temperature_imp->text() != "") {
+        gcode_str += ("\nM109 S" + extruder_temp);
+    }
 
     if (mode == mode_inter_cycle) {
         pause_inter_cycle = true;
