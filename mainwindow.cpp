@@ -2,7 +2,6 @@
 #include <map>
 using namespace std;
 
-
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -447,3 +446,9 @@ void MainWindow::on_pushButton_main_axes_down_clicked()
     fwrite.close();
 }
 
+
+
+
+void proverka() {
+    ;
+}
