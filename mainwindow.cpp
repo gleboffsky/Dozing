@@ -445,3 +445,12 @@ void MainWindow::on_pushButton_main_axes_down_clicked()
     current_axis_coord -= ui->spinBox_shift->text().toInt();
     fwrite.close();
 }
+
+void proverka2() {
+    ;
+}
+
+
+void proverka() {
+    ;
+}
