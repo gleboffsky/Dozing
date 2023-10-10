@@ -446,5 +446,7 @@ void MainWindow::on_pushButton_main_axes_down_clicked()
     fwrite.close();
 }
 
-
+void proverka2() {
+    ;
+}
 
